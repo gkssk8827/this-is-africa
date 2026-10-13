@@ -1,0 +1,37 @@
+# 민감 정보 / 로그인 세션 — 절대 커밋 금지
+blog/naver_profile/
+blog/.env
+blog/naver_state.json
+blog/*storage_state*.json
+
+# 로그/스크린샷 (CI에서는 아티팩트로 업로드하므로 저장소엔 불필요)
+blog/logs/
+
+# 생성된 글 산출물(주제별 output/[주제]/ 폴더 — research.md/draft.md/final.*/images/post.json)은
+# 매 실행마다 재생성되는 결과물이라 버전관리 불필요. 단, 스케줄/이력을 담는 DB 역할의
+# output/topics/*.json과 output/publish-state.json은 계속 추적한다(30일 키워드 재사용 금지
+# 로직·rotation 진행 상황이 여기 저장되므로 유실되면 안 됨).
+blog/output/*
+!blog/output/topics/
+!blog/output/publish-state.json
+
+# 예약된 자동화(tia-blog-daily-draft 등)가 만드는 발행 대기 산출물 — output/과 마찬가지로
+# 매 실행마다 재생성되는 결과물이라 버전관리 불필요.
+blog/발행대기/
+
+# 파이썬 캐시
+blog/.pytest_cache/
+**/__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# 대용량 원본 영상 등 (깃허브 100MB 제한 — 영상은 구글 드라이브 링크로 공유)
+blog/assets/
+blog/images/
+
+# 기타 캐시
+.pytest_cache/
+.env
+.env.*

@@ -1,0 +1,1026 @@
+{
+  "product_daily": [
+    "product-standard24-overview",
+    "product-standard24-highlight",
+    "0822_시그니처_빅토리아폭포",
+    "0823_시그니처_세렝게티",
+    "0824_시그니처_킬리만자로",
+    "0825_시그니처_오카방고델타",
+    "0826_시그니처_테이블마운틴",
+    "0915_시그니처_나미비아듄45",
+    "0920_시그니처_잔지바르"
+  ],
+  "review": [],
+  "broadcast": [
+    "broadcast-ebs-worldtrip-southafrica-2",
+    "broadcast-ebs-worldtrip-southafrica-1",
+    "broadcast-ebs-worldtrip-southafrica-3",
+    "broadcast-ebs-worldtrip-southafrica-4",
+    "broadcast-kbs-walking-worldwide-southafrica-1",
+    "broadcast-kbs-walking-worldwide-southafrica-2",
+    "broadcast-kbs-walking-worldwide-southafrica-3",
+    "broadcast-kbs-walking-worldwide-southafrica-4",
+    "broadcast-wangja-geoji-ep1-pyramid",
+    "broadcast-wangja-geoji-cairo",
+    "broadcast-wangja-geoji-luxor",
+    "broadcast-wangja-geoji-hurghada",
+    "broadcast-wangja-geoji-food",
+    "broadcast-wangja-geoji-cast",
+    "broadcast-wangja-geoji-package",
+    "broadcast-wangja-geoji-ep1-giza-scene",
+    "broadcast-wangja-geoji-ep1-nile-food",
+    "broadcast-wangja-geoji-ep2-marriott-hotel",
+    "broadcast-wangja-geoji-ep3-desert-camping",
+    "broadcast-wangja-geoji-ep3-nile-cruise-boarding",
+    "0819_왕자와거지3_3",
+    "0820_왕자와거지3_4",
+    "0827_왕자와거지4_1",
+    "0828_왕자와거지4_2",
+    "0829_왕자와거지4_3",
+    "0903_왕자와거지5_1",
+    "0904_왕자와거지5_2",
+    "0905_왕자와거지5_3",
+    "0906_왕자와거지5_4",
+    "0907_왕자와거지6_1",
+    "0908_왕자와거지6_2",
+    "0909_왕자와거지6_3",
+    "0910_왕자와거지6_4",
+    "0911_넷플릭스마사이마라촬영지",
+    "broadcast-netflix_location",
+    "0913_왕자와거지7_1",
+    "0913_왕자와거지7_2",
+    "0913_왕자와거지7_3",
+    "0913_왕자와거지7_4",
+    "0921_왕자와거지8_1",
+    "0921_왕자와거지8_2",
+    "0921_왕자와거지8_3",
+    "0921_왕자와거지8_4",
+    "0926_왕자와거지_이집트총정리",
+    "broadcast-netflix_activity",
+    "broadcast-netflix_camp_night",
+    "broadcast-kbs_kruger",
+    "broadcast-kbs_lionshead",
+    "broadcast-kbs_bungee"
+  ],
+  "notice": [
+    "notice-wangja-geoji-2026-07-27"
+  ],
+  "qna": [
+    "d168b57be273",
+    "74bf2fb7d34e",
+    "c04ccdc82094",
+    "7788c890e02d"
+  ],
+  "book": [
+    "book-1bu-등록금환불세계여행",
+    "book-1bu-케이프타운무장강도",
+    "book-1bu-그린마켓스퀘어부채장사"
+  ],
+  "southeast_trend": [
+    "southeast_trend-2026-07-22-짐바브웨-빅토리아폭포-관광호황",
+    "southeast_trend-2026-07-22-케냐-관광객-급증",
+    "southeast_trend-2026-07-31-세계레인저의날",
+    "southeast_trend-2026-08-31-아프리카계사람들의날",
+    "southeast_trend-2026-08-10-세계사자의날",
+    "southeast_trend-2026-08-12-세계코끼리의날",
+    "southeast_trend-2026-08-01-르완다-아카게라-국립공원",
+    "0818_오디세이모로코",
+    "southeast_trend-2026-08-21-잔지바르-월드트래블어워즈",
+    "southeast_trend-2026-09-12-남아공-관광객급증-사파리1위",
+    "southeast_trend-2026-09-12-나미비아-신규항공노선",
+    "southeast_trend-2026-09-22-세계코뿔소의날"
+  ],
+  "history": [
+    {
+      "category": "broadcast",
+      "id": "broadcast-ebs-worldtrip-southafrica-2",
+      "title": "세계테마기행 소웨토·크루거, 만델라 유적과 야생 사이",
+      "topic_dir": "output/세계테마기행-남아공-2부-소웨토-크루거",
+      "source": "manual",
+      "keywords": [
+        "만델라",
+        "세계테마기행",
+        "소웨토",
+        "크루거국립공원",
+        "팀바바티"
+      ],
+      "published_at": "2026-07-16T05:38:08+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-ebs-worldtrip-southafrica-1",
+      "title": "세계테마기행 케이프타운, 워터프런트부터 펭귄해변까지",
+      "topic_dir": "output/세계테마기행-남아공-1부-케이프타운",
+      "source": "manual",
+      "keywords": [
+        "볼더스비치",
+        "세계테마기행",
+        "케이프타운",
+        "테이블마운틴",
+        "희망봉"
+      ],
+      "published_at": "2026-07-16T05:38:43+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-ebs-worldtrip-southafrica-3",
+      "title": "세계테마기행 드라켄즈버그, 용의 산맥과 바소토의 삶",
+      "topic_dir": "output/세계테마기행-남아공-3부-드라켄즈버그",
+      "source": "manual",
+      "keywords": [
+        "드라켄즈버그",
+        "바소토족",
+        "세계테마기행",
+        "암피시어터",
+        "투겔라폭포"
+      ],
+      "published_at": "2026-07-16T05:43:49+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-ebs-worldtrip-southafrica-4",
+      "title": "세계테마기행 남아공 4부, 와인랜드부터 노던케이프 사막까지",
+      "topic_dir": "output/세계테마기행-남아공-4부-와인랜드-노던케이프",
+      "source": "manual",
+      "keywords": [
+        "블라이드리버캐년",
+        "세계테마기행",
+        "스텔렌보스",
+        "오츠혼",
+        "와인랜드"
+      ],
+      "published_at": "2026-07-16T05:49:40+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-kbs-walking-worldwide-southafrica-1",
+      "title": "걸어서 세계속으로 남아공 1부, 크루거 사파리와 텐트 캠핑",
+      "topic_dir": "output/걸어서-세계속으로-남아공-1부-크루거-사파리",
+      "source": "manual",
+      "keywords": [
+        "걸어서세계속으로",
+        "크루거국립공원"
+      ],
+      "published_at": "2026-07-20T11:28:08+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-kbs-walking-worldwide-southafrica-2",
+      "title": "걸어서 세계속으로 남아공 2부, 케이프타운 라이언스헤드와 랑가 타운십",
+      "topic_dir": "output/걸어서-세계속으로-남아공-2부-케이프타운",
+      "source": "manual",
+      "keywords": [
+        "걸어서세계속으로",
+        "케이프타운"
+      ],
+      "published_at": "2026-07-20T12:21:40+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-kbs-walking-worldwide-southafrica-3",
+      "title": "걸어서 세계속으로 남아공 3부, 치치카마 협곡과 번지점프",
+      "topic_dir": "output/걸어서-세계속으로-남아공-3부-치치카마-번지점프",
+      "source": "manual",
+      "keywords": [
+        "걸어서세계속으로",
+        "치치카마"
+      ],
+      "published_at": "2026-07-20T12:37:00+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-kbs-walking-worldwide-southafrica-4",
+      "title": "걸어서 세계속으로 남아공 4부, 림포포 샤이부족 마을",
+      "topic_dir": "output/걸어서-세계속으로-남아공-4부-샤이부족",
+      "source": "manual",
+      "keywords": [
+        "걸어서세계속으로",
+        "림포포"
+      ],
+      "published_at": "2026-07-21T10:10:16+00:00"
+    },
+    {
+      "category": "notice",
+      "id": "notice-wangja-geoji-2026-07-27",
+      "title": "왕자와 거지 이집트 편, 디스이즈아프리카 현지 코디로 참여했어요",
+      "topic_dir": "output/notice-왕자와-거지-이집트-현지코디-방송",
+      "source": "manual",
+      "keywords": [],
+      "published_at": "2026-07-21T11:31:54+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-07-22-짐바브웨-빅토리아폭포-관광호황",
+      "title": "짐바브웨 빅토리아폭포, 2026 자연경관상 수상에 관광객까지 급증",
+      "topic_dir": "output/southeast_trend-2026-07-22-짐바브웨-빅토리아폭포-관광호황",
+      "source": "schedule",
+      "keywords": [
+        "빅토리아폭포",
+        "짐바브웨"
+      ],
+      "published_at": "2026-07-22T11:55:50+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-07-22-케냐-관광객-급증",
+      "title": "케냐 관광객 11% 급증, 2026년 사파리 여행 지금이 적기인 이유",
+      "topic_dir": "output/southeast_trend-2026-07-22-케냐-관광객-급증",
+      "source": "schedule",
+      "keywords": [
+        "관광객증가",
+        "케냐"
+      ],
+      "published_at": "2026-07-22T12:33:04+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "product-standard24-overview",
+      "title": "TIA 스탠다드 24일 완전정리, 가격부터 일정까지 한눈에",
+      "topic_dir": "output/product-standard24-overview",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-07-22T13:01:33+00:00"
+    },
+    {
+      "category": "book",
+      "id": "book-1bu-등록금환불세계여행",
+      "title": "이토록아프리카 1부, 등록금 환불하고 떠난 스물한 살의 세계여행",
+      "topic_dir": "output/book-등록금환불세계여행",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-07-22T13:23:13+00:00"
+    },
+    {
+      "category": "book",
+      "id": "book-1bu-케이프타운무장강도",
+      "title": "케이프타운 무장강도 사건, 그래도 다시 가고 싶은 이유",
+      "topic_dir": "output/book-케이프타운무장강도",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-07-22T13:51:14+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "product-standard24-highlight",
+      "title": "케냐 사파리, 빅토리아폭포, 나미비아사막 하이라이트 코스 후기",
+      "topic_dir": "output/product-standard24-highlight",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-07-22T14:18:37+00:00"
+    },
+    {
+      "category": "book",
+      "id": "book-1bu-그린마켓스퀘어부채장사",
+      "title": "케이프타운 그린마켓스퀘어, 부채 하나로 버틴 스물한 살의 생존기",
+      "topic_dir": "output/book-그린마켓스퀘어부채장사",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-07-22T14:37:07+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-ep1-pyramid",
+      "title": "왕자와 거지 1화, 기자 피라미드 앞 플랭크 대결 리뷰",
+      "topic_dir": "output/broadcast-wangja-geoji-ep1-pyramid",
+      "source": "manual",
+      "keywords": [
+        "기자피라미드",
+        "김요한",
+        "왕자와거지",
+        "쟈니"
+      ],
+      "published_at": "2026-07-30T11:22:18+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-cairo",
+      "title": "카이로 편, 왕자와 거지가 담은 이집트 옛 수도",
+      "topic_dir": "output/broadcast-wangja-geoji-cairo",
+      "source": "manual",
+      "keywords": [
+        "기자피라미드",
+        "이집트박물관",
+        "카이로"
+      ],
+      "published_at": "2026-07-30T11:29:57+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-luxor",
+      "title": "룩소르 편, 왕자와 거지 촬영지 왕가의 계곡과 카르낙 신전",
+      "topic_dir": "output/broadcast-wangja-geoji-luxor",
+      "source": "manual",
+      "keywords": [
+        "룩소르",
+        "왕가의계곡",
+        "카르낙신전"
+      ],
+      "published_at": "2026-07-30T14:02:14+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-hurghada",
+      "title": "후르가다 편, 왕자와 거지 마지막 무대는 홍해 스노클링 성지",
+      "topic_dir": "output/broadcast-wangja-geoji-hurghada",
+      "source": "manual",
+      "keywords": [
+        "스노클링",
+        "홍해",
+        "후르가다"
+      ],
+      "published_at": "2026-07-30T14:08:18+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-food",
+      "title": "왕자와 거지 이집트음식 총정리, 코샤리부터 이집트디저트까지",
+      "topic_dir": "output/broadcast-wangja-geoji-food",
+      "source": "manual",
+      "keywords": [
+        "이집트디저트",
+        "이집트음식",
+        "코샤리"
+      ],
+      "published_at": "2026-07-30T14:15:56+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-cast",
+      "title": "왕자와 거지 출연진 케미, 이특·신동부터 쟈니어스까지",
+      "topic_dir": "output/broadcast-wangja-geoji-cast",
+      "source": "manual",
+      "keywords": [
+        "신동",
+        "이특",
+        "쟈니"
+      ],
+      "published_at": "2026-07-30T14:22:41+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-package",
+      "title": "왕자와 거지 촬영지 그대로, 이집트요르단 골드20 완전정리",
+      "topic_dir": "output/broadcast-wangja-geoji-package",
+      "source": "manual",
+      "keywords": [
+        "골드20",
+        "나일크루즈",
+        "이집트요르단"
+      ],
+      "published_at": "2026-07-30T16:41:12+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-07-31-세계레인저의날",
+      "title": "세계 레인저의 날, 아프리카 사파리를 지키는 사람들",
+      "topic_dir": "output/southeast_trend-2026-07-31-세계레인저의날",
+      "source": "manual",
+      "keywords": [
+        "사파리가이드",
+        "세계레인저의날",
+        "아프리카사파리"
+      ],
+      "published_at": "2026-07-31T10:44:30+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-08-31-아프리카계사람들의날",
+      "title": "케이프타운 역사와 넬슨 만델라, 아프리카계 사람들의 날",
+      "topic_dir": "output/southeast_trend-2026-08-31-아프리카계사람들의날",
+      "source": "manual",
+      "keywords": [
+        "넬슨만델라",
+        "아프리카계사람들의날",
+        "케이프타운역사"
+      ],
+      "published_at": "2026-07-31T10:49:12+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-08-10-세계사자의날",
+      "title": "세계 사자의 날, 마사이마라 사자 이야기와 아프리카 사파리",
+      "topic_dir": "output/southeast_trend-2026-08-10-세계사자의날",
+      "source": "manual",
+      "keywords": [
+        "마사이마라사자",
+        "세계사자의날",
+        "아프리카사파리"
+      ],
+      "published_at": "2026-07-31T10:57:20+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-08-12-세계코끼리의날",
+      "title": "세계 코끼리의 날, 나이로비 코끼리고아원 이야기",
+      "topic_dir": "output/southeast_trend-2026-08-12-세계코끼리의날",
+      "source": "manual",
+      "keywords": [
+        "세계코끼리의날",
+        "암보셀리코끼리",
+        "코끼리고아원"
+      ],
+      "published_at": "2026-07-31T11:02:08+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-08-01-르완다-아카게라-국립공원",
+      "title": "르완다 아카게라 국립공원, 2026년 최고 여행지 25선에 선정된 이유",
+      "topic_dir": "output/southeast_trend-2026-08-01-르완다-아카게라-국립공원",
+      "source": "manual",
+      "keywords": [
+        "고릴라트레킹",
+        "르완다",
+        "아카게라국립공원"
+      ],
+      "published_at": "2026-07-31T12:27:02+00:00"
+    },
+    {
+      "category": "qna",
+      "id": "d168b57be273",
+      "title": "상품 가격은 어떻게 표기되어 있나요? 달러는 왜 따로인가요?",
+      "topic_dir": "output/상품-가격-표기-및-달러-분리-이유",
+      "source": "manual",
+      "keywords": [
+        "가격",
+        "경비",
+        "달러",
+        "분리표기",
+        "원화",
+        "환율"
+      ],
+      "published_at": "2026-07-31T12:53:20+00:00"
+    },
+    {
+      "category": "qna",
+      "id": "74bf2fb7d34e",
+      "title": "TIA 동남부 아프리카 일주, 등급별로 뭐가 다를까",
+      "topic_dir": "output/qna-동남부아프리카-일주-프로그램-구성",
+      "source": "manual",
+      "keywords": [
+        "골드",
+        "다이아",
+        "등급",
+        "브론즈",
+        "시그니처"
+      ],
+      "published_at": "2026-07-31T13:16:50+00:00"
+    },
+    {
+      "category": "qna",
+      "id": "c04ccdc82094",
+      "title": "TIA 골드 vs 브론즈, 뭐가 다르고 누구에게 맞을까",
+      "topic_dir": "output/qna-골드-브론즈-차이",
+      "source": "manual",
+      "keywords": [
+        "골드",
+        "등급비교",
+        "브론즈",
+        "차이"
+      ],
+      "published_at": "2026-07-31T13:21:30+00:00"
+    },
+    {
+      "category": "qna",
+      "id": "7788c890e02d",
+      "title": "TIA 아프리카 여행 숙소 등급, 성급부터 하이엔드까지",
+      "topic_dir": "output/qna-숙소-등급",
+      "source": "manual",
+      "keywords": [
+        "등급",
+        "성급",
+        "숙소",
+        "호텔"
+      ],
+      "published_at": "2026-07-31T13:25:19+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-ep1-giza-scene",
+      "title": "기자 피라미드 첫 만남, 왕자와 거지가 놀란 이유",
+      "topic_dir": "output/broadcast-wangja-geoji-ep1-giza-scene",
+      "source": "manual",
+      "keywords": [
+        "기자관광",
+        "왕좌서바이벌",
+        "피라미드카페"
+      ],
+      "published_at": "2026-08-06T09:36:30+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-ep1-nile-food",
+      "title": "나일강변 파라오의 식탁, 왕자와 거지 카이로 맛집 미션",
+      "topic_dir": "output/broadcast-wangja-geoji-ep1-nile-food",
+      "source": "manual",
+      "keywords": [
+        "나일강",
+        "카이로맛집",
+        "파라오의식탁"
+      ],
+      "published_at": "2026-08-06T09:42:55+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-ep2-marriott-hotel",
+      "title": "왕자의 보상, 피라미드 뷰 특급호텔 메나하우스",
+      "topic_dir": "output/broadcast-wangja-geoji-ep2-marriott-hotel",
+      "source": "manual",
+      "keywords": [
+        "기자피라미드",
+        "메나하우스",
+        "왕자와거지"
+      ],
+      "published_at": "2026-08-06T10:23:24+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-ep3-desert-camping",
+      "title": "왕자와 거지 3화 기자 사막 노숙, 거지팀의 진짜 캠핑 후기",
+      "topic_dir": "output/broadcast-wangja-geoji-ep3-desert-camping",
+      "source": "manual",
+      "keywords": [
+        "기자사막캠핑",
+        "왕자와거지"
+      ],
+      "published_at": "2026-08-11T09:51:50+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-wangja-geoji-ep3-nile-cruise-boarding",
+      "title": "왕자와 거지 3화, 이집트 나일강 럭셔리 크루즈 승선기",
+      "topic_dir": "output/broadcast-wangja-geoji-ep3-nile-cruise-boarding",
+      "source": "manual",
+      "keywords": [
+        "나일강크루즈",
+        "왕자와거지"
+      ],
+      "published_at": "2026-08-11T15:02:25+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "0818_오디세이모로코",
+      "title": "오디세이 모로코 촬영지, 아이트벤하두·에사우이라 가는 법",
+      "topic_dir": "output/0818_오디세이모로코",
+      "source": "manual",
+      "keywords": [
+        "모로코촬영지",
+        "오디세이"
+      ],
+      "published_at": "2026-08-19T11:53:12+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0819_왕자와거지3_3",
+      "title": "왕자와 거지 3화, 나일강 크루즈 캐리어 자물쇠 게임 리뷰",
+      "topic_dir": "output/0819_왕자와거지3_3",
+      "source": "manual",
+      "keywords": [
+        "왕자와거지",
+        "캐리어자물쇠게임"
+      ],
+      "published_at": "2026-08-19T12:14:45+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0820_왕자와거지3_4",
+      "title": "ENA 왕자와 거지 3화, 나일강 크루즈 청첩장 게임과 탁구공 균형 게임",
+      "topic_dir": "output/0820_왕자와거지3_4",
+      "source": "manual",
+      "keywords": [
+        "왕자와거지",
+        "청첩장게임"
+      ],
+      "published_at": "2026-08-19T12:43:47+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "0822_시그니처_빅토리아폭포",
+      "title": "빅토리아폭포 패키지여행, TIA 시그니처34 폭포관람과 디너기차 총정리",
+      "topic_dir": "output/0822_시그니처_빅토리아폭포",
+      "source": "manual",
+      "keywords": [
+        "TIA시그니처34",
+        "빅토리아폭포패키지"
+      ],
+      "published_at": "2026-08-19T13:09:07+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "0823_시그니처_세렝게티",
+      "title": "세렝게티 응고롱고로 패키지여행, TIA 시그니처34 게임드라이브 총정리",
+      "topic_dir": "output/0823_시그니처_세렝게티",
+      "source": "manual",
+      "keywords": [
+        "TIA시그니처34",
+        "세렝게티응고롱고로패키지"
+      ],
+      "published_at": "2026-08-19T21:50:57+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "0824_시그니처_킬리만자로",
+      "title": "킬리만자로 만다라산장 일출트레킹, TIA 시그니처34 1박2일 총정리",
+      "topic_dir": "output/0824_시그니처_킬리만자로",
+      "source": "manual",
+      "keywords": [
+        "TIA시그니처34",
+        "킬리만자로트레킹"
+      ],
+      "published_at": "2026-08-20T09:08:34+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "0825_시그니처_오카방고델타",
+      "title": "오카방고델타 모코로투어, TIA 시그니처34 보츠와나 쵸베사파리 총정리",
+      "topic_dir": "output/0825_시그니처_오카방고델타",
+      "source": "manual",
+      "keywords": [
+        "TIA시그니처34",
+        "오카방고델타모코로투어"
+      ],
+      "published_at": "2026-08-20T09:27:43+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "0826_시그니처_테이블마운틴",
+      "title": "케이프타운 테이블마운틴 희망봉, TIA 시그니처34 남아공구간 총정리",
+      "topic_dir": "output/0826_시그니처_테이블마운틴",
+      "source": "manual",
+      "keywords": [
+        "TIA시그니처34",
+        "테이블마운틴희망봉"
+      ],
+      "published_at": "2026-08-20T09:46:16+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0827_왕자와거지4_1",
+      "title": "왕자와 거지 4화, 나일강 시장 흥정 미션과 이집트 흥정 노하우",
+      "topic_dir": "output/0827_왕자와거지4_1",
+      "source": "manual",
+      "keywords": [
+        "나일강시장흥정",
+        "왕자와거지"
+      ],
+      "published_at": "2026-08-20T10:47:11+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0828_왕자와거지4_2",
+      "title": "왕자와 거지 4화, 이집트 기념품 대결 속 신동 매출왕 비결",
+      "topic_dir": "output/0828_왕자와거지4_2",
+      "source": "manual",
+      "keywords": [],
+      "published_at": "2026-08-20T14:17:44+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0829_왕자와거지4_3",
+      "title": "왕자와 거지 4화, 매출왕이 받은 크루즈 조식 vs 거지팀의 검은 봉지 아침",
+      "topic_dir": "output/0829_왕자와거지4_3",
+      "source": "manual",
+      "keywords": [],
+      "published_at": "2026-08-21T13:15:29+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-08-21-잔지바르-월드트래블어워즈",
+      "title": "잔지바르, 2026 월드 트래블 어워즈 아프리카 갈라 개최지로 선정된 이유",
+      "topic_dir": "output/southeast_trend-2026-08-21-잔지바르-월드트래블어워즈",
+      "source": "schedule",
+      "keywords": [
+        "월드트래블어워즈",
+        "잔지바르",
+        "탄자니아"
+      ],
+      "published_at": "2026-08-21T13:59:07+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0903_왕자와거지5_1",
+      "title": "왕자와 거지 5화 스핑크스의 길, 룩소르 이집트 상식 퀴즈",
+      "topic_dir": "output/0903_왕자와거지5_1",
+      "source": "manual",
+      "keywords": [
+        "스핑크스의길",
+        "왕자와거지"
+      ],
+      "published_at": "2026-09-01T14:35:21+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0904_왕자와거지5_2",
+      "title": "왕자와 거지 5화, 룩소르 케이팝 스피드 퀴즈 총력전",
+      "topic_dir": "output/0904_왕자와거지5_2",
+      "source": "manual",
+      "keywords": [
+        "왕자와거지",
+        "케이팝퀴즈"
+      ],
+      "published_at": "2026-09-01T14:39:52+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0905_왕자와거지5_3",
+      "title": "ENA 왕자와 거지 5화, 멤버십 퀴즈 최종전 왕자팀 탄생",
+      "topic_dir": "output/0905_왕자와거지5_3",
+      "source": "manual",
+      "keywords": [
+        "멤버십퀴즈",
+        "왕자와거지"
+      ],
+      "published_at": "2026-09-01T14:44:08+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0906_왕자와거지5_4",
+      "title": "왕자와 거지 5화, 나일강변 텐트 노숙 vs 왕자 스위트룸 대비",
+      "topic_dir": "output/0906_왕자와거지5_4",
+      "source": "manual",
+      "keywords": [
+        "나일강텐트",
+        "왕자와거지"
+      ],
+      "published_at": "2026-09-01T14:47:47+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0907_왕자와거지6_1",
+      "title": "왕자와 거지 6화, 후르가다 섬 리조트 라면 내기 신뢰 게임",
+      "topic_dir": "output/0907_왕자와거지6_1",
+      "source": "manual",
+      "keywords": [
+        "왕자와거지",
+        "후르가다"
+      ],
+      "published_at": "2026-09-06T12:29:26+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0908_왕자와거지6_2",
+      "title": "왕자와 거지 6화, 모자 뺏기 게임과 이집트 햄버거 한 끼",
+      "topic_dir": "output/0908_왕자와거지6_2",
+      "source": "manual",
+      "keywords": [
+        "왕자와거지",
+        "이집트패스트푸드"
+      ],
+      "published_at": "2026-09-06T12:57:20+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0909_왕자와거지6_3",
+      "title": "후르가다 왕자와 거지 6화, 사진작가 코너와 거지의 진심",
+      "topic_dir": "output/0909_왕자와거지6_3",
+      "source": "manual",
+      "keywords": [
+        "왕자와거지",
+        "홍해스노클링"
+      ],
+      "published_at": "2026-09-06T13:20:44+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0910_왕자와거지6_4",
+      "title": "왕자와 거지 6화, 고대인과의 대화 상형문자 미션 총정리",
+      "topic_dir": "output/0910_왕자와거지6_4",
+      "source": "manual",
+      "keywords": [
+        "왕자와거지",
+        "이집트상형문자"
+      ],
+      "published_at": "2026-09-06T13:48:54+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0911_넷플릭스마사이마라촬영지",
+      "title": "넷플릭스 케냐간세끼 마사이마라 거버너스캠프, 실제로 가는 법",
+      "topic_dir": "output/0911_넷플릭스마사이마라촬영지",
+      "source": "schedule",
+      "keywords": [
+        "거버너스캠프",
+        "마사이마라"
+      ],
+      "published_at": "2026-09-07T02:10:52+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-netflix_location",
+      "title": "넷플릭스 케냐간세끼 마사이마라 거버너스캠프, 실제로 가는 법",
+      "topic_dir": "output/0911_넷플릭스마사이마라촬영지",
+      "source": "schedule",
+      "keywords": [
+        "거버너스캠프",
+        "마사이마라"
+      ],
+      "published_at": "2026-09-07T02:11:21+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-09-12-남아공-관광객급증-사파리1위",
+      "title": "남아공 관광객 657만명 12.4%↑, 사파리 여행지 세계 1위 등극",
+      "topic_dir": "output/southeast_trend-2026-09-12-남아공-관광객급증-사파리1위",
+      "source": "manual",
+      "keywords": [
+        "관광객증가",
+        "남아공",
+        "사파리1위"
+      ],
+      "published_at": "2026-09-12T05:40:53+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-09-12-나미비아-신규항공노선",
+      "title": "나미비아 신규 항공노선, 빅토리아폭포 잇는 아프리카 종단길",
+      "topic_dir": "output/southeast_trend-2026-09-12-나미비아-신규항공노선",
+      "source": "manual",
+      "keywords": [
+        "나미비아",
+        "신규항공노선",
+        "취리히빈툭"
+      ],
+      "published_at": "2026-09-12T05:40:58+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0913_왕자와거지7_1",
+      "title": "왕자와 거지 7화, 상형문자 미션 결말 — 캐러멜 정답과 왕자 2인 탄생",
+      "topic_dir": "output/0913_왕자와거지7_1",
+      "source": "manual",
+      "keywords": [
+        "고대인과의대화",
+        "왕자와거지"
+      ],
+      "published_at": "2026-09-13T03:00:48+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0913_왕자와거지7_2",
+      "title": "왕자와 거지 7화, 홍해 리조트 수영장 서비스 미션 — 물온도체크 개그전",
+      "topic_dir": "output/0913_왕자와거지7_2",
+      "source": "manual",
+      "keywords": [
+        "물온도체크",
+        "왕자와거지"
+      ],
+      "published_at": "2026-09-13T03:05:35+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0913_왕자와거지7_3",
+      "title": "왕자와 거지 7화, 손바닥 밀치기 균형 게임과 해변 라면 끓이기",
+      "topic_dir": "output/0913_왕자와거지7_3",
+      "source": "manual",
+      "keywords": [
+        "라면끓이기",
+        "왕자와거지"
+      ],
+      "published_at": "2026-09-13T03:10:36+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0913_왕자와거지7_4",
+      "title": "왕자와 거지 7화, 이집트 해변에서 즐긴 한국 라면 파티",
+      "topic_dir": "output/0913_왕자와거지7_4",
+      "source": "manual",
+      "keywords": [
+        "왕자와거지",
+        "해외여행라면"
+      ],
+      "published_at": "2026-09-13T03:15:02+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "0915_시그니처_나미비아듄45",
+      "title": "나미비아 듄45 일출투어, TIA 시그니처34 유일 코스",
+      "topic_dir": "output/0915_시그니처_나미비아듄45",
+      "source": "manual",
+      "keywords": [
+        "듄45",
+        "시그니처34"
+      ],
+      "published_at": "2026-09-15T10:29:59+00:00"
+    },
+    {
+      "category": "southeast_trend",
+      "id": "southeast_trend-2026-09-22-세계코뿔소의날",
+      "title": "세계 코뿔소의 날, 아프리카 사파리에서 만나는 코뿔소 이야기",
+      "topic_dir": "output/southeast_trend-2026-09-22-세계코뿔소의날",
+      "source": "manual",
+      "keywords": [
+        "세계코뿔소의날",
+        "코뿔소"
+      ],
+      "published_at": "2026-09-15T10:37:58+00:00"
+    },
+    {
+      "category": "product_daily",
+      "id": "0920_시그니처_잔지바르",
+      "title": "잔지바르 스톤타운, TIA 시그니처34 여정의 첫 목적지",
+      "topic_dir": "output/0920_시그니처_잔지바르",
+      "source": "manual",
+      "keywords": [
+        "스톤타운",
+        "잔지바르",
+        "탄자니아"
+      ],
+      "published_at": "2026-09-20T03:16:06+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0921_왕자와거지8_1",
+      "title": "이집트 사막 캠핑, 왕자와 거지 8화 별빛 하룻밤",
+      "topic_dir": "output/0921_왕자와거지8_1",
+      "source": "manual",
+      "keywords": [],
+      "published_at": "2026-09-21T14:51:58+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0921_왕자와거지8_2",
+      "title": "후르가다 유리바닥 배, 왕자와 거지 8화 홍해 감상법",
+      "topic_dir": "output/0921_왕자와거지8_2",
+      "source": "manual",
+      "keywords": [],
+      "published_at": "2026-09-21T14:51:58+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0921_왕자와거지8_3",
+      "title": "홍해 스노클링 미션, 왕자와 거지 8화 인어 왕자 도전기",
+      "topic_dir": "output/0921_왕자와거지8_3",
+      "source": "manual",
+      "keywords": [],
+      "published_at": "2026-09-21T14:51:58+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0921_왕자와거지8_4",
+      "title": "진짜 이집트 숫자 이야기, 왕자와 거지 8화가 남긴 궁금증",
+      "topic_dir": "output/0921_왕자와거지8_4",
+      "source": "manual",
+      "keywords": [],
+      "published_at": "2026-09-21T14:51:58+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "0926_왕자와거지_이집트총정리",
+      "title": "왕자와 거지 이집트 편 총정리, 8화 전편 하이라이트",
+      "topic_dir": "output/0926_왕자와거지_이집트총정리",
+      "source": "manual",
+      "keywords": [],
+      "published_at": "2026-09-26T00:55:51+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-netflix_activity",
+      "title": "마사이마라 게임드라이브 vs 벌룬사파리, 뭐가 다를까",
+      "topic_dir": "output/0926_마사이마라_게임드라이브벌룬사파리",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-09-26T01:37:48+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-netflix_camp_night",
+      "title": "울타리 없는 캠프에서의 하룻밤, 거버너스 캠프 이야기",
+      "topic_dir": "output/0926_거버너스캠프",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-09-26T01:37:48+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-kbs_kruger",
+      "title": "크루거 국립공원 빅5 사파리 완전정복",
+      "topic_dir": "output/0926_크루거빅5",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-09-26T01:37:48+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-kbs_lionshead",
+      "title": "케이프타운 라이언스헤드 등반 난이도 총정리",
+      "topic_dir": "output/0926_라이언스헤드",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-09-26T01:37:49+00:00"
+    },
+    {
+      "category": "broadcast",
+      "id": "broadcast-kbs_bungee",
+      "title": "번지점프 성지, 블라우크란스 다리 완전정리",
+      "topic_dir": "output/0926_블라우크란스번지",
+      "source": "schedule",
+      "keywords": [],
+      "published_at": "2026-09-26T01:37:49+00:00"
+    }
+  ],
+  "published": {
+    "d168b57be273": {
+      "date": "2026-07-09",
+      "topic_dir": "output/상품-가격-표기-및-달러-분리-이유"
+    }
+  }
+}

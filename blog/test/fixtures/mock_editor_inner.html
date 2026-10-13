@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mock SmartEditor Inner</title>
+<style>
+  #publish-dialog { display: none; border: 1px solid #ccc; padding: 12px; margin-top: 12px; }
+  #cat-dropdown { display: none; border: 1px solid #ccc; }
+  .se-text-paragraph { border: 1px dashed #ccc; min-height: 24px; padding: 4px; margin: 4px 0; }
+</style>
+</head>
+<body>
+  <!-- 실제 네이버 구조를 흉내낸 mock DOM. publish.py의 실제 함수들을 이 DOM에 대고 실행해서 검증한다. -->
+
+  <button type="button" class="save_btn__bzc5B" onclick="window.testState.action='draft'">
+    <span class="text__bK4MD">저장</span>
+  </button>
+
+  <button type="button" class="publish_btn__m9KHH" onclick="document.getElementById('publish-dialog').style.display='block'">
+    <span class="text__d09H7">발행</span>
+  </button>
+
+  <button type="button" class="se-image-toolbar-button" onclick="document.getElementById('hidden-file-input').click()">사진</button>
+  <input type="file" id="hidden-file-input" style="display:none" onchange="handleFileChosen(event)">
+
+  <button type="button" class="se-table-toolbar-button" onclick="insertMockTable()">표추가</button>
+  <button type="button" class="se-bold-toolbar-button" data-group="propertyToolbar"
+          onmousedown="event.preventDefault()" onclick="document.execCommand('bold')">B</button>
+  <button type="button" class="se-insert-quotation-default-toolbar-button" onclick="insertMockQuote()">인용구추가</button>
+  <button type="button" class="se-quotation-quotation_line-toolbar-button" onclick="styleMockQuoteLine()">인용구2</button>
+
+  <div class="se-documentTitle">
+    <div class="se-text-paragraph" contenteditable="true" id="mock-title"></div>
+  </div>
+
+  <div id="mock-body-container">
+    <div class="se-text-paragraph" contenteditable="true" id="mock-body-first"></div>
+    <div id="table-host"></div>
+  </div>
+
+  <button type="button" class="se-canvas-bottom-button" onclick="addBottomParagraph()">본문 추가</button>
+
+  <div id="publish-dialog">
+    <div class="option_category___kpJc">
+      <button type="button" class="selectbox_button__jb1Dt" onclick="toggleCategoryDropdown()">
+        <span class="text__sraQE" id="cat-label">TIA NEW</span>
+      </button>
+      <div id="cat-dropdown">
+        <ul>
+          <li class="item__sAGX9"><label for="13_TIA NEW" onclick="selectCategory(this)">TIA NEW</label></li>
+          <li class="item__sAGX9"><label for="18_아프리카 여행 정보" onclick="selectCategory(this)">아프리카 여행 정보</label></li>
+          <li class="item__sAGX9"><label for="23_여행 정보" onclick="selectCategory(this)">여행 정보</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <input id="tag-input" placeholder="#태그 입력 (최대 30개)" onkeydown="handleTagKey(event)">
+
+    <div>
+      <span class="input_radio__yZcoa"><input type="radio" name="open_type" id="open_public" checked><label class="radio_label__mB6ia" for="open_public">전체공개</label></span>
+      <span class="input_radio__yZcoa"><input type="radio" name="open_type" id="open_neighbor"><label class="radio_label__mB6ia" for="open_neighbor">이웃공개</label></span>
+      <span class="input_radio__yZcoa"><input type="radio" name="open_type" id="open_both_neighbor"><label class="radio_label__mB6ia" for="open_both_neighbor">서로이웃공개</label></span>
+      <span class="input_radio__yZcoa"><input type="radio" name="open_type" id="open_private"><label class="radio_label__mB6ia" for="open_private">비공개</label></span>
+    </div>
+
+    <button type="button" class="confirm_btn__WEaBq" data-testid="seOnePublishBtn" onclick="window.testState.action='publish'">
+      <span class="text__sraQE">발행</span>
+    </button>
+  </div>
+
+  <script>
+    window.testState = {
+      category: document.getElementById('cat-label').textContent,
+      tags: [],
+      images: [],
+      action: null,
+    };
+
+    function toggleCategoryDropdown() {
+      const el = document.getElementById('cat-dropdown');
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function selectCategory(labelEl) {
+      const name = labelEl.textContent;
+      document.getElementById('cat-label').textContent = name;
+      window.testState.category = name;
+      document.getElementById('cat-dropdown').style.display = 'none';
+    }
+
+    function handleTagKey(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const input = event.target;
+        if (input.value.trim()) {
+          window.testState.tags.push(input.value.trim());
+          input.value = '';
+        }
+      }
+    }
+
+    function handleFileChosen(event) {
+      const file = event.target.files[0];
+      if (file) {
+        window.testState.images.push(file.name);
+        const img = document.createElement('div');
+        img.textContent = '[이미지: ' + file.name + ']';
+        document.getElementById('mock-body-container').appendChild(img);
+      }
+    }
+
+    // 실제 SmartEditor: 표 추가 버튼을 누르면 기본 3행 3열 표가 바로 삽입되고,
+    // 표 가장자리의 "N행/N열 다음에 추가" 버튼으로 크기를 늘릴 수 있다.
+    let mockTableRows = 0;
+    let mockTableCols = 0;
+
+    function insertMockTable() {
+      mockTableRows = 3;
+      mockTableCols = 3;
+      renderMockTable();
+    }
+
+    function addMockTableCol() { mockTableCols += 1; renderMockTable(); }
+    function addMockTableRow() { mockTableRows += 1; renderMockTable(); }
+
+    function renderMockTable() {
+      let html = '<table class="se-table-content"><tbody>';
+      for (let r = 0; r < mockTableRows; r++) {
+        html += '<tr class="se-tr">';
+        for (let c = 0; c < mockTableCols; c++) {
+          html += '<td class="se-cell"><div class="se-text-paragraph" contenteditable="true"></div></td>';
+        }
+        html += '</tr>';
+      }
+      html += '</tbody></table><div class="table-controls">';
+      for (let c = 0; c < mockTableCols; c++) {
+        html += '<button type="button" class="se-cell-add-button" onclick="addMockTableCol()">' + c + '열 다음에 열 추가</button>';
+      }
+      for (let r = 0; r < mockTableRows; r++) {
+        html += '<button type="button" class="se-cell-add-button" onclick="addMockTableRow()">' + r + '행 다음에 행 추가</button>';
+      }
+      html += '</div>';
+      document.getElementById('table-host').innerHTML = html;
+    }
+
+    let afterBlockCounter = 0;
+    function addBottomParagraph() {
+      const container = document.getElementById('mock-body-container');
+      const p = document.createElement('div');
+      p.className = 'se-text-paragraph mock-after-block';
+      p.contentEditable = 'true';
+      afterBlockCounter += 1;
+      p.id = 'mock-body-after-block-' + afterBlockCounter;
+      container.appendChild(p);
+      p.focus();
+    }
+
+    // 실제 SmartEditor: 인용구 추가 버튼을 누르면 기본 스타일(인용구1)의 인용구가
+    // 바로 삽입되고, 스타일 버튼으로 인용구2(세로선) 등으로 바꿀 수 있다.
+    function insertMockQuote() {
+      const container = document.getElementById('mock-body-container');
+      const div = document.createElement('div');
+      div.className = 'se-quotation';
+      div.innerHTML = '<div class="se-text-paragraph mock-quote-content" contenteditable="true"></div>';
+      container.appendChild(div);
+      div.querySelector('.mock-quote-content').focus();
+    }
+
+    function styleMockQuoteLine() {
+      const quotes = document.querySelectorAll('.se-quotation');
+      if (quotes.length) {
+        quotes[quotes.length - 1].classList.add('quote-line-style');
+        quotes[quotes.length - 1].querySelector('.mock-quote-content').focus();
+      }
+    }
+  </script>
+</body>
+</html>

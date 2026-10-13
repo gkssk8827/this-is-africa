@@ -1,0 +1,985 @@
+{
+  "_설명": "우선순위 기반 발행 일정 (2026-07-15 개편). 1회 실행(주 1회, 7건 배치)마다 다음 순서로 슬롯을 채운다: 1) broadcast(방송) → 2) notice(공지) → 3) southeast_trend(동남부 여행 긍정 이슈) → 4) 그 외(product_daily/qna/book/review, fallback_rotation 순환). 상위 우선순위 카테고리에 pending 항목이 있는 만큼 먼저 채우고, 남는 슬롯만 다음 우선순위로 넘어간다. qna는 여기 items에 넣지 않고 output/topics/notion-topics.json에서 실시간으로 가져온다. southeast_trend는 애초에 items에 없다 — 매 실행마다 researcher가 그날 기준 실시간 웹검색으로 주제를 직접 정한다(scripts/content_schedule.py next-batch가 이 슬롯은 needs_topic_search:true 로만 표시). review/notice는 소스 자료가 없어 비어있음 — 사용자가 수기로 추가하거나(사전 등록) 실행 시점에 즉석으로 내용을 준다. review/notice 항목을 추가할 때는 raw_content 필드에 후기/공지 원문을 그대로 넣어야 researcher가 리서치를 진행할 수 있다 (없으면 원문 필요하다고 보고하고 멈춘다). broadcast 항목은 두 가지 방식이 있다: (a) 신규 방식 — raw_content(사용자가 받아쓰기한 방송 스크립트)와 drive_link(방송 영상 구글드라이브 링크)를 채워서 추가 → 이 경우 스크립트가 1차 근거, 이미지는 항상 방송 스크린샷 사용(GPT 생성 대체 안 함). (b) 구식 — source가 products/on-air.md 섹션을 가리키는 기존 항목(레거시, 계속 유효). 각 항목에 선택적으로 \"keywords\": [\"케냐\", \"허니문\"] 필드를 추가할 수 있다 — 채워두면 같은 키워드가 최근 30일 안에 이미 발행됐을 때 이 항목을 자동으로 건너뛰고 같은 카테고리의 다음 항목으로 넘어간다(scripts/content_schedule.py의 KEYWORD_BAN_DAYS 규칙). 필드를 안 채우면 이 검사 자체가 적용되지 않는다 — 예를 들어 product_daily의 상품별 4부작(overview/highlight/booking_tip/inclusion)처럼 같은 상품명을 의도적으로 반복하는 시리즈는 keywords를 비워두는 게 맞다. qna는 notion의 핵심키워드 컬럼이 이미 있어 자동으로 이 검사가 걸린다.",
+  "priority_tiers": [
+    "broadcast",
+    "notice",
+    "southeast_trend"
+  ],
+  "fallback_rotation": [
+    "product_daily",
+    "qna",
+    "book",
+    "qna",
+    "book",
+    "qna",
+    "review"
+  ],
+  "items": [
+    {
+      "id": "0903_왕자와거지5_1",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 5화 — 스핑크스의 길에서 펼쳐진 이집트 상식 퀴즈 대결",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "ENA/ENA PLAY 예능 〈왕자와 거지〉 5화(2026.8.24 방영, E05). 이집트 도착 후 진행된 '스핑크스의 수수께끼' 퀴즈 미션 1라운드. 사용자 받아쓰기 스크립트(mm:ss):\n\n[00:08~01:51] 이집트에 도착한 출연진들이 '신비로운 나라', '진짜 이집트에 왔구나'라며 감탄. 이번 회차 룰(왕자가 되느냐 거지가 되느냐)을 다시 상기시키며 스태프가 '스핑크스의 길'이라는 장소로 안내. 실제 스핑크스 조각상들이 늘어선 길에서 '스핑크스의 수수께끼' 미션이 시작된다고 발표. 총 3라운드로 진행되며 라운드마다 문제 유형이 다름.\n[01:51~12:12] 1라운드: 왼쪽에 늘어선 15마리의 스핑크스 조각상에 문제가 하나씩 붙어 있고, OB팀과 YB팀이 각자 반대쪽 끝에서 출발해 같은 문제를 풀며 전진, 8번째 문제를 먼저 맞히는 팀이 승리하는 방식. 실제 출제된 문제: 이집트의 영문 스펠링(Egypt), 이집트 국기 가운데 그려진 동물(독수리), 기자의 3대 피라미드 중 가장 거대한 피라미드의 주인(쿠푸왕, 파라오), 피라미드를 지키는 스핑크스의 신체 구성(사자의 몸+인간의 머리), 클레오파트라 7세가 안토니우스를 유혹하기 위해 마셨다는 음료의 레시피(식초에 진주를 녹인 것), 고대 이집트인이 냄새 제거를 위해 세계 최초로 발명한 것(향수), 피라미드 건설 노동자에게 돈 대신 지급됐다는 것(맥주), 클레오파트라가 9개 언어로 인사말을 할 줄 알았다는 사실을 바탕으로 한 각국 감사 인사 릴레이(아리가토·그라시아스·쉐쉐·슈크란 등) 문제까지 이어짐. 문제를 풀며 양 팀 모두 '정신을 차리자'를 반복하며 긴장감 있게 진행.\n[12:12~13:43] 1라운드 결과 발표: OB팀(선배 멤버들) 승리. 이집트 상식 문제를 거의 다 맞히며 팀 승리에 크게 기여한 멤버가 있었고, 마지막 문제였던 '슈크란'을 기억 못 해 아쉬워하는 리액션, 신전 조각상 개수를 미리 세어뒀다는 뒷이야기도 등장.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(0~13분43초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: '스핑크스의 길'로 소개된 실제 장소는 룩소르의 스핑크스 참배로(Avenue of Sphinxes, 카르낙 신전과 룩소르 신전을 잇는 유적)로 추정됨(리서치 단계에서 웹검색으로 교차확인 필요). TIA '이집트*요르단 일주 20일(골드20)' 상품이 룩소르 카르낙·룩소르 신전을 방문 일정에 포함하고 있어 연결 지점이 있음. 다만 퀴즈 게임 자체는 방송 서바이벌 포맷 고유의 연출이라 상품과 억지로 연결하지 않고, 실제 방문 가능한 유적이라는 정보 위주로만 자연스럽게 짚어줄 것.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E05.260824.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0904_왕자와거지5_2",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 5화 — 케이팝 스피드 퀴즈, 아이돌 상식 총력전",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "ENA/ENA PLAY 예능 〈왕자와 거지〉 5화(2026.8.24 방영, E05). '스핑크스의 수수께끼' 미션 2라운드, 케이팝(K-POP) 퀴즈. 사용자 받아쓰기 스크립트(mm:ss):\n\n[13:43~14:53] 1라운드 승리(OB팀) 직후, 2라운드 카테고리 발표: 케이팝 퀴즈. 스피드전으로 진행될 것을 예고하며 양 팀 모두 자신감과 긴장감을 동시에 드러냄('나 진짜 몰라', '여기 전문가 있어').\n[14:53~26:22] 2라운드 실제 진행: 아이돌 그룹 멤버 수 계산 문제(예: '트리플S 곱하기 코르티스는 몇 명?', '라이즈 빼기 엔믹스 더하기 투어스 빼기 스테이씨는?'), 아이돌 그룹 막내·리더 이름을 순서대로 말하기(투모로우바이투게더, 세븐틴, 2PM, 르세라핌, 걸스데이 등), 노래 가사 해석 퀴즈('내가 제일 잘 나가' 속 약속 시간 등), 세 곡의 제목에 공통으로 들어간 단어 맞히기(애프터스쿨 '뱅', 아이브 '뱅', 빅뱅 '뱅뱅뱅') 등 다양한 유형의 문제가 빠르게 이어짐. 스피드 게임 특유의 긴장감 속에 두 팀 모두 오답과 정답을 반복하며 스쿼트 벌칙도 언급됨.\n[26:22] 2라운드 결과: YB팀(후배 멤버들) 승리로 스코어 1대1 동점. 이긴 팀 멤버가 상대팀의 열정에 감동받았다는 후일담('형이 나를 위해서 그렇게 뛴 게 느껴졌다')도 등장.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(13분43초~26분22초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 이 라운드는 케이팝 퀴즈로 이집트 여행지·상품과 직접 연결되는 지점이 없음 — 억지로 연결하지 않고, 방송 자체의 재미 요소(출연진의 케이팝 지식 대결)로만 다룬다. 다만 도입부에 이 회차가 이집트 룩소르 일대에서 촬영됐다는 맥락은 자연스럽게 짚어줄 수 있음.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E05.260824.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0905_왕자와거지5_3",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 5화 — 멤버십 퀴즈 서바이벌, 최종 왕자는 누가 됐을까",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "ENA/ENA PLAY 예능 〈왕자와 거지〉 5화(2026.8.24 방영, E05). '스핑크스의 수수께끼' 미션 최종 3라운드(멤버십 퀴즈)와 최종 결과. 사용자 받아쓰기 스크립트(mm:ss):\n\n[26:22~28:39] 최종 3라운드 규칙 발표: 상대 팀 멤버들에 대한 문제(멤버십 퀴즈)로, 힌트제가 도입됨 — 한 명씩 도전해 실패하면 힌트가 주어지는 방식. 문제는 인터넷·유튜브·나무위키로 미리 조사해 출제됐다고 밝힘. 멤버들이 '나 이거 약하다', 'INTP라 남한테 관심이 없다' 등 부담을 토로.\n[29:00~45:41] 실제 3라운드 진행: 멤버의 신체 특징(자신 있는 부위, 보조개 위치), 영문 이름, 데뷔 전 준비했던 직업, 출간한 책 제목과 그 안의 특정 퍼포먼스(등파덕사 100까기), 특이 체질(민트를 먹으면 재채기), 초코 피자를 판매한 적 없는 브랜드(파파존스), 드라마 데뷔작, 드라마화까지 된 인생 웹소설, 얼굴 점의 위치, 코로 리코더를 연주하는 특기, 태권도 시험 때의 징크스(수호 동물), 춤출 때 자주 날리는 것, 중학교 수학시험 점수, 영어 이름, '태정태세문단세' 순서로 몇 대 왕인지, 좋아하는 음식(보쌈+쌈장) 등 디테일한 개인 정보를 묻는 문제가 이어짐. 힌트가 나올 때마다 두 팀 모두 정답을 맞히려 애쓰는 모습.\n[45:41] 최종 결과: OB팀 승리로 최종 스코어 2대1 — OB팀이 최종 우승, '왕자'팀으로 확정. 우승 직후 환호와 함께, 지지 않으려 열심히 뛴 상대팀에 대한 미안함과 뿌듯함이 교차하는 인터뷰가 이어짐('지성이한테 미안했다', '형들이 너무 노련했다').\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(26분22초~45분41초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 이 라운드는 출연진 개인 정보를 다루는 예능 특유의 퀴즈라 이집트 여행지·상품과 직접 연결되는 지점이 없음 — 억지로 연결하지 않는다.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E05.260824.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0906_왕자와거지5_4",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 5화 — 나일강변 텐트 노숙 vs 왕자의 스위트룸",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "ENA/ENA PLAY 예능 〈왕자와 거지〉 5화(2026.8.24 방영, E05). 최종 결과 발표 이후 왕자팀·거지팀의 하룻밤 숙소 대비. 사용자 받아쓰기 스크립트(mm:ss):\n\n[45:41~52:52] 최종 결과 발표 이후, 왕자팀(OB)과 거지팀(YB)에게 각각 숙소 공지. 왕자팀은 전날과 같은 왕자 숙소를 그대로 이용, 거지팀은 동선 이슈로 숙소가 변경돼 선착장(나일강변)에 텐트를 설치해 하룻밤을 보내게 됐다는 발표. '더 좋은 데인가' 기대했던 멤버들이 실제로는 텐트라는 걸 알고 아쉬워하는 리액션.\n[52:52~55:19] 실제 나일강변 선착장 텐트촌 도착 장면. 바로 옆에서 현지인들의 야외 음악 파티(화려한 라이트, 축제 분위기)가 크게 열리고 있어 음악 소리가 매우 시끄러운 채로 텐트를 설치. 멤버들이 궁금해서 파티 구경을 갔다가 현지인들과 어울려 잠깐 춤을 추는 에피소드도 등장. 시끄러운 음악 속에서도 피곤함에 지쳐 잠을 청하는 모습('그 소리마저도 자장가 같았다').\n[55:19~58:58] 반대로 왕자팀은 이틀 연속 왕자 숙소(스위트룸)에서 지내며 콜라로 축배를 들고 여유를 즐기는 장면. '사람 삶에 있어서 여유가 참 중요한 것 같다', '거지가 됐을 때는 왜 이렇게 힘드나 싶었는데 왕자가 되니 감사하다'는 소감이 이어짐. 전날 텐트에서 잔 경험이 있는 멤버는 침대와 이불, 사방이 막힌 방이 얼마나 소중한지 실감했다고 소회를 밝힘.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(45분41초~58분58초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결(가능하면 언급): 나일강변 텐트 숙영 장면은 게임 서바이벌 설정이라 TIA 정규 일정과는 무관하지만, TIA '이집트*요르단 일주 20일(골드20)' 상품에는 나일 크루즈 럭셔리 5성급 3박4일이 포함되어 모든 여행객이 편안한 객실에서 묵는다는 점을 자연스럽게 대비해 언급할 수 있음(단, 이번 회차 장면 자체가 크루즈가 아니라 강변 텐트라는 점을 명확히 구분해서 서술). packages.md 5번 항목 참고. 이 게임 자체를 상품과 억지로 연결하지 않는다.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E05.260824.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0907_왕자와거지6_1",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 6화 — 이집트 섬에서 벌어진 라면 내기, 무한한 신뢰 게임",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "ENA/ENA PLAY 예능 〈왕자와 거지〉 6화(2026.8.31 방영, E06). 사용자 받아쓰기 스크립트(mm:ss):\n\n[00:12~01:29] 새로운 촬영지(이집트의 한 섬 리조트)에 도착한 출연진들이 통유리창 너머 풍경과 수영장 뷰에 감탄('와 미쳤다 대박이다', '뷰 미쳤는데', '영화 속으로 들어갔네'). 이번 회차도 왕자/거지 신분을 가르는 서바이벌이 시작됨을 알리는 오프닝.\n[01:48~02:41] 첫 미니게임 '오줌싸개'(타겟 게임) 공개 — 스태프가 신분을 정하는 메인 게임이 아니라고 미리 알려 부담을 덜어줌. 승리 보상으로 한식 라면이 걸려 있다는 소식에 출연진이 크게 반가워함('제일 좋아! 무조건 가야 돼').\n[02:41~20:46] 본게임 '무한한 신뢰' 진행. 몸에 찬 슬링 벨트를 뒤에서 팀원 두 명이 붙잡고 버텨주는 동안, 벨트를 찬 사람이 모래를 퍼내 상대 팀 깃발을 먼저 쓰러뜨리면 승리하는 팀전. 몸무게를 밝히며 무거운 사람 1명+가벼운 사람 2명으로 짝을 구성하는 요령, 가위바위보로 팀 정하기, 실제 3라운드에 걸친 대결(밀고 당기기, 살살 달래기, 바람 때문에 흔들리는 깃발 등 코믹한 실랑이)이 이어짐. 최종적으로 한쪽 팀이 승리해 라면을 획득.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(0~20분46초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 이번 회차 촬영 장소(이집트 섬 리조트로 추정)는 리서치 단계에서 구체 지명을 웹검색으로 교차 확인 필요. 게임 자체는 방송 서바이벌 포맷 고유의 연출이라 상품과 억지로 연결하지 않되, TIA가 이 방송의 이집트 현지 코디로 실제 참여했다는 사실은 자연스럽게 짧게 짚어줄 것(기존 발행글 'notice-wangja-geoji-2026-07-27' 참고, 같은 설명을 매번 길게 반복하지 않는다).",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E06.260831.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0908_왕자와거지6_2",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 6화 — 모자 뺏기 게임과 이집트에서 만난 K푸드 한 끼",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "ENA/ENA PLAY 예능 〈왕자와 거지〉 6화(2026.8.31 방영, E06). 사용자 받아쓰기 스크립트:\n\n[20:46~26:00] 보너스 미니게임 '모자 뺏기' 진행 — 상대의 모자를 먼저 뺏는 사람이 이기는 몸싸움형 게임. 서로 눈을 마주치면 웃음이 터지는 팀, 선글라스를 벗고 마주보게 하는 룰 추가 등 코믹한 장면이 이어짐. 게임 도중 '이때까지 게임들이 제일 재밌다'는 자체 총평도 등장.\n[26:00~27:05] 게임 후 휴식 겸 간식 타임 — 이집트 현지에서 파는 햄버거를 맛보며 '이집트가 햄버거 잘하네', '햄버거에서 맛은 다르네' 등 현지 패스트푸드에 대한 솔직한 반응을 나눔. 한 명은 '이거 맛있다' 하며 옆 사람에게 맛보라고 권하는 훈훈한 장면도 있음.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(20분46초~27분05초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 현지 패스트푸드/간식 에피소드는 방송 특유의 가벼운 코너라 상품과 직접 연결하지 않되, 이집트 현지 음식 문화(패스트푸드 프랜차이즈도 활발하다는 점)를 정보성으로 짚어주는 음식 소재 글로 구성. 이미 발행된 'broadcast-wangja-geoji-food'(코샤리·이집트 디저트 총정리)와 겹치지 않도록, 이번 글은 '현지 패스트푸드/캐주얼 간식' 각도에 집중할 것.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E06.260831.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0909_왕자와거지6_3",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 6화 — 휴양 섬 자유시간, 사진작가 놀이와 왕자가 되고 싶은 진심",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "ENA/ENA PLAY 예능 〈왕자와 거지〉 6화(2026.8.31 방영, E06). 사용자 받아쓰기 스크립트:\n\n[27:05~28:43] 물가에서 휴식하며 '물이 진짜 맑다', '열대어들이 많지 않을까' 등 풍경 감상. 열대어가 따뜻한 물에 사는지를 두고 티격태격하는 코믹한 대화가 이어지다가, 결국 '우리가 왕자가 되느냐 거지가 되느냐가 중요하다'며 본론으로 돌아옴.\n[28:43~29:35] 다음 라운드를 위해 두 멤버가 몰래 팀을 짜고 작전을 도모하는 장면('비겁하게 해서라도 왕자 무조건 될 수 있어') — 예능 특유의 아군 만들기 코너.\n[29:35~31:06] 한 멤버가 즉석 사진작가로 변신해 동료들의 인생샷을 찍어주는 코너. '얼마 줄 수 있어?' 식의 장난스러운 흥정, 스튜디오에서 사진을 공부했었다는 자기소개도 곁들여짐.\n[31:06~33:21] 이동하며 바람에 휘날리는 리포터 놀이('태풍 지역 보도한 리포터 같다'), 오늘 하루 '거지' 역할에 대한 솔직한 소감('거지가 됐을 때는 다른 사람일 것 같았는데 아닌 것 같다')을 나누는 장면.\n[33:21~34:17] 저녁 라면 타임을 기다리며 산책, 다음 미션을 예고.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(27분05초~34분17초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 이 구간은 출연진 개인 소감·케미 위주라 상품과 직접 연결되진 않음 — 억지로 연결하지 않고, 이집트 현지에서 느낀 자유시간의 여유를 소개하는 감상/여행기 톤으로 구성.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E06.260831.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0910_왕자와거지6_4",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 6화 — 고대인과의 대화, 상형문자 미션으로 가려진 진짜 왕자",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "ENA/ENA PLAY 예능 〈왕자와 거지〉 6화(2026.8.31 방영, E06). '고대인과의 대화' 신분 결정 미션. 사용자 받아쓰기 스크립트:\n\n[34:17~35:12] 미션 발표: 고대 이집트인과 소통하기 위한 '고대인과의 대화' — 개인전이며, 이번엔 단 2명만 왕자가 되고 나머지 4명은 거지가 된다는 룰. 왕자 방은 이 섬에 단 2개뿐이라는 설명.\n[35:12~48:00] 제작진이 나눠준 수첩에 적힌 단서('담수가 담긴 큰 웅덩이 곁에서 단서를 획득하라. 고대의 언어를 찾고 이해하는 자가 왕자가 될 것이다. 가장 높은 오두막으로 그것을 가져오는 자들에게 축복이 있다. 현대의 문명을 이용하는 자는 영원히 구걸하며 살게 될 것이다')을 해석해, 수영장 등 '담수 웅덩이' 주변에서 상형문자 모양의 단서 카드를 찾고, 이를 조합해 '가장 높은 오두막'으로 가져가야 하는 개인 미션. 출연진들이 '담수'·'웅덩이'의 뜻을 서로 묻거나, 몰래 단서를 공유하려다 실패하는 등 코믹한 시행착오가 이어짐.\n[48:00~끝] 각자 단서를 찾아 상형문자를 맞춰가는 과정, 서로 견제하며 정보를 감추는 눈치싸움, 마지막까지 단서를 하나도 못 찾은 멤버의 좌절 등으로 마무리(정확한 최종 결과는 이 스크립트 구간 이후로, 명시적으로 다시 확인되기 전까지 단정하지 않는다).\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(34분17초~끝)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결(가능하면 언급): 이 미션의 모티프인 '고대 이집트 상형문자'는 TIA '이집트*요르단 일주 20일(골드20)' 상품이 실제로 방문하는 룩소르 카르낙 신전·왕가의 계곡 등 유적에서 흔히 볼 수 있는 실제 문화 요소다. 게임 자체를 상품과 억지로 연결하지 않되, 실제 여행객도 이런 상형문자를 직접 볼 수 있다는 정보로 자연스럽게 연결. packages.md 5번 항목 참고.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E06.260831.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0827_왕자와거지4_1",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 4화 — 이집트 나일강 시장 흥정 미션, 진짜 이집트 흥정 노하우",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "티빙(실제로는 ENA·ENA PLAY로 확인됨) 예능 〈왕자와 거지〉 4화(2026.8.17 방영, E04). 사용자 받아쓰기 스크립트(타임스탬프 mm:ss):\n\n[00:08~04:02] 전날 밤 게임(자물쇠 비밀번호 맞추기)에서 성공한 사람이 왕자가 되는 장면 마무리. 이후 아침, 왕자가 된 멤버들이 전날 사막 노숙(거지팀)과 비교해 크루즈에서의 하룻밤이 훨씬 쾌적했다는 이야기('첫날은 흙 먹는 느낌, 둘째 날은 밥과 김치 먹는 느낌', '침낭도 좋았다', '천국에 온 느낌')를 나눔.\n[04:02~05:04] 새로운 미션 발표: 나일강의 상인이 되어보는 미션. 스태프가 각 참가자에게 300 이집트파운드(약 9만원)를 나눠주고, 이 돈으로 현지 시장에서 물건을 구매해 다음 날 왕자팀에게 비싸게 되팔면 혜택이 있다는 룰 설명. '이집트는 흥정하는 재미가 있는 나라'라는 설명과 함께 진행.\n[05:04~11:43] 실제 나일강변 시장(수크)에서 참가자들이 상인들과 영어·바디랭귀지로 흥정하는 장면. 스핑크스·파라오 모티프 기념품, 반지, 목걸이, 마그네틱, 조각품, 옷, 가방, 맥주 등을 구매. 흥정 문구('Happy', 'Last price', 'Discount' 등)를 주고받으며 가격을 깎는 실제 이집트 시장 흥정 문화가 상세히 담김. 한 상점에는 한국인 관광객을 겨냥한 안내문('아저씨 고집이 셉니다, 끝까지 깎으세요')이 붙어있었다는 언급도 있음.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(0~11분43초, 특히 시장 흥정 장면 5분04초~11분43초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 이 시장 흥정 자체는 방송 특유의 미션이라 TIA 정규 일정과 직접 연결되진 않지만, TIA '이집트*요르단 일주 20일(골드20)' 상품 일정에도 카이로·룩소르 등 현지 시장을 둘러볼 자유시간/투어가 포함돼 있어 이집트 여행 시 실제 흥정 팁을 안내하는 정보성 콘텐츠로 가치가 있음. 다만 게임 자체를 상품과 억지로 연결하지 않음.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E04.260817.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0828_왕자와거지4_2",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 4화 — 신동·요한·지성의 이집트 기념품 팔이 대결, 매출왕은?",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "티빙(실제로는 ENA·ENA PLAY로 확인됨) 예능 〈왕자와 거지〉 4화(2026.8.17 방영, E04). 전날 시장에서 사 온 물건을 왕자팀(이특·던·자니)에게 되파는 판매 미션. 사용자 받아쓰기 스크립트:\n\n[11:43~12:19] 다음날 아침, 스태프가 '거지분들이 직접 발품 팔아 구매한 물건을 오늘 왕자님들께 판매할 예정'이라 발표. 왕자팀은 마음에 드는 물건을 현명한 가격에 자비로 구매하는 룰.\n[12:19~34:54] 세 명(김요한, 신동, 지성)이 각자 상인으로 변신해 화려한 의상을 입고 차례로 물건을 소개·판매하는 코너. 김요한은 옷·조각품·목걸이(무당벌레 모티프, 도중 실수로 깨짐) 등을 판매하며 예능감으로 웃음 유발. 신동은 쇠똥구리 목각 인형, 마그네틱 3종, 이니셜 각인 돌 판, 야광 벽걸이 그림, 에코백 등을 화려한 상술과 멘트로 연달아 판매해 압도적인 매출을 올림. 지성은 자연석 목걸이(58년산이라는 설명)를 판매하려 하지만 상대적으로 덜 팔림.\n[34:54~55:39] 왕자팀(이특·던·자니)이 실제로 흥정하며 물건을 구매하는 장면. 파운드-원화 환율(1파운드=30원) 설명과 함께 옷값·목걸이값 등을 놓고 밀고 당기는 협상이 이어짐. 신동은 마그네틱 3종류를 개당 5천원~1만원대로 판매하며 계속 수익을 올림.\n[55:39~56:29] 매출 발표: 압도적 1위(매출왕)는 신동. '홈쇼핑 완판 신화 상인'이라는 별명과 함께 왕자팀과 크루즈에서 조식을 함께 먹는 특별 보상을 받음. 나머지 상인(김요한, 지성)은 빵으로 식사.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(11분43초~56분29초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 이 판매 대결 자체는 방송 서바이벌 포맷 고유의 연출이라 TIA 정규 일정과는 무관 — 다만 이 코너에서 소개된 이집트 대표 기념품(스카라브/쇠똥구리 모티프, 파피루스, 파라오 장신구 등)은 실제 이집트 여행 시 흔히 접하는 기념품이라는 점에서 정보성으로만 자연스럽게 짚어줄 수 있음(게임 자체를 상품과 억지로 연결하지 않음).",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E04.260817.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0829_왕자와거지4_3",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 4화 — 왕자팀 크루즈 조식 vs 거지팀의 소박한 아침",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "티빙(실제로는 ENA·ENA PLAY로 확인됨) 예능 〈왕자와 거지〉 4화(2026.8.17 방영, E04). 신분에 따라 완전히 달라지는 식사 장면을 다루는 구간. 사용자 받아쓰기 스크립트:\n\n[00:08~04:02] 전날 사막/야외에서 노숙한 거지팀과 크루즈에서 편히 잔 왕자팀의 아침 컨디션 차이에 대한 대화. '첫날은 흙을 먹는 느낌, 둘째 날은 밥과 김치를 먹는 느낌이었다'는 표현으로 숙소 격차를 실감나게 묘사.\n[55:39~56:32] 판매 대결에서 매출왕(신동)이 확정되고, 그 보상으로 왕자팀과 함께 크루즈에서 정식 조식을 먹는 특별대우를 받는다는 발표.\n[56:32~59:54] 실제 크루즈 조식 장면: 신동이 왕자 의상을 입고 크루즈 갑판에서 근사하게 차려진 조식(빵, 커피 등)을 즐기며 '이게 진짜 왕자 같다'는 반응. 반면 나머지 거지팀 멤버들은 야외에서 검정 비닐봉지에 담긴 소박한 빵과 물로 식사. 첫날 먹었던 콩 요리로 만든 음식과 비교하며 '이 맛을 알 것 같다'는 반응, 지성이 특히 힘들어하는 모습이 담김.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(0~4분, 55분39초~59분54초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결(필수 언급): TIA '이집트*요르단 일주 20일(골드20)' 상품에는 '나일 크루즈 럭셔리 5성급 3박4일'이 포함되어 있고 크루즈 내 조식이 기본 제공된다 — 방송처럼 신분에 따라 식사가 갈리는 서바이벌 설정과 달리, TIA 정규 여행객은 모두 크루즈에서 편안한 조식을 즐길 수 있다는 점을 자연스럽게 연결해 본문(CTA 또는 FAQ)에 반드시 언급할 것. packages.md 5번 항목 참고. 단, 나일강 크루즈 자체를 다룬 다른 글(이미 발행됨, 08-18)과 겹치지 않도록 이번 글은 '조식/식사 비교'라는 각도에 집중할 것.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E04.260817.720p-NEXT.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0822_시그니처_빅토리아폭포",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처34 하이라이트 — 빅토리아폭포, 세계 3대 폭포를 걷다",
+      "source": "products/packages.md#2-tia-시그니처-34-6",
+      "status": "pending"
+    },
+    {
+      "id": "0823_시그니처_세렝게티",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처34 하이라이트 — 세렝게티&응고롱고로, 아프리카 사파리의 정점",
+      "source": "products/packages.md#2-tia-시그니처-34-6",
+      "status": "pending"
+    },
+    {
+      "id": "0824_시그니처_킬리만자로",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처34 하이라이트 — 킬리만자로 만다라산장 일출 트레킹",
+      "source": "products/packages.md#2-tia-시그니처-34-6",
+      "status": "pending"
+    },
+    {
+      "id": "0825_시그니처_오카방고델타",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처34 하이라이트 — 보츠와나 오카방고 델타 모코로 투어",
+      "source": "products/packages.md#2-tia-시그니처-34-6",
+      "status": "pending"
+    },
+    {
+      "id": "0826_시그니처_테이블마운틴",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처34 하이라이트 — 케이프타운 테이블마운틴과 희망봉",
+      "source": "products/packages.md#2-tia-시그니처-34-6",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-wangja-geoji-ep3-desert-camping",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 3화 — 사막 한복판 노숙, 거지팀의 리얼 캠핑 후기",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "티빙 예능 〈왕자와 거지〉 3화(2026.8.10 방영, E03). 이 회차에서 게임에 진 '거지'팀은 이집트 기자 사막 한복판에서 하룻밤 노숙(침낭+모래바닥)을 하고, 이긴 '왕자'팀은 5성급 호텔에서 묵는다. 사용자 받아쓰기 스크립트(타임스탬프 mm:ss, 화자 라벨은 다글로가 붙인 익명 라벨이라 실명 아님):\n\n[00:11] 거지팀이 사막 한가운데 표류된 듯한 하룻밤을 회상. '모래바람이 모닝콜이었다', '모래가 이불이었다'는 표현. 문을 열자 피라미드가 바로 앞에 보이는 장관.\n[01:45~04:42] 아침에 눈뜨자마자 모래바람. 신발도 거지꼴. 텐트/침낭에서 잔 밤, 별빛 아래 낭만과 동시에 고생스러움을 함께 묘사.\n[04:42~07:56] 왕자팀과 재회. 왕자팀은 거지팀이 진짜 노숙했다는 걸 안 믿고 '텐트가 어딨냐', '고속도로만 달렸으면서' 등 만담. 거지팀은 침낭 밑으로 자갈이 느껴졌다, 모래가 옷 속까지 파고들었다 등 디테일하게 항변. 왕자팀은 전날 밤 피라미드 뷰 테라스가 있는 호텔(왕자 숙소)에서 묵었다며 대비.\n[07:56~08:31] 다음 목적지(룩소르)로 이동하기 위해 공항으로 출발.\n\n이미지 캡처용 영상 파일은 구글드라이브가 아니라 사용자 로컬 파일이다 — drive_link 필드에 gdown 대상 URL 대신 로컬 절대경로가 들어있으니, image-maker는 gdown을 시도하지 말고 그 경로를 곧바로 extract_screenshot.py --video 인자로 사용할 것. 이 구간(0~8분31초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: TIA '이집트*요르단 일주 20일(골드20)' 상품이 카이로·기자피라미드 지역을 동일하게 방문한다(단, 사막 노숙 자체는 방송 서바이벌 게임 설정이고 TIA 정규 일정에는 포함되지 않음 — 이 점은 명확히 구분해서 서술 필요). packages.md 참고.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E03.260810.1080p.H265-F1RST.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-wangja-geoji-ep3-nile-cruise-boarding",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 3화 — 이집트 나일강 럭셔리 크루즈 승선기",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "티빙 예능 〈왕자와 거지〉 3화(2026.8.10 방영, E03). 사막 노숙 다음 목적지는 룩소르, 그리고 2박3일간 대여한 나일강 프라이빗 크루즈(유람선) 승선 장면. 사용자 받아쓰기 스크립트:\n\n[08:31~09:26] 다음 여행지는 룩소르라고 발표.\n[09:26~10:25] 룩소르 나일강이 카이로보다 한적하고 넓어 보인다는 인상, 신전 방문(관광객 많고 유명한 신전이라는 언급 — 구체 신전명은 스크립트에 명시 안 됨), 말이 끄는 마차가 거리에 많다는 묘사.\n[11:23~12:20] 비포장길을 달려 도착한 곳에서 나일강 크루즈 승선 예고. 방송 측이 '이집트 여행의 가장 인기 있는 상품 중 하나가 나일강 크루즈'라고 소개하며, 참가자들을 위해 호화 프라이빗 크루즈를 2박3일 대여했다고 발표.\n[12:20~14:22] 실제 승선. 수영장, 스위트룸 등 시설에 감탄하는 리액션('배 안에서 자본 적 처음', '너무 럭셔리하다', 'TV 이렇게 뭐야'). 냄새·인테리어까지 극찬.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link 필드의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(8분31초~14분22초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결(필수 언급): TIA '이집트*요르단 일주 20일(골드20)' 상품에 '나일 크루즈 럭셔리 5성급 3박4일' 일정이 실제로 포함되어 있다(요금 1,050만원, 19박20일, 카이로·나일크루즈· 룩소르·아스완·아부심벨·후르가다 등 방문). 이 방송 장면과 TIA 상품의 나일강 크루즈 일정이 직접 겹치므로 본문(CTA 또는 FAQ)에 반드시 언급할 것. packages.md 5번 항목 참고.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E03.260810.1080p.H265-F1RST.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0819_왕자와거지3_3",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 3화 — 캐리어 자물쇠 게임, 크루즈 방 배정 서바이벌",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "티빙 예능 〈왕자와 거지〉 3화(2026.8.10 방영, E03). 나일강 크루즈에 승선한 뒤, 좋은 방을 차지하기 위한 서바이벌 미니게임 라운드. 사용자 받아쓰기 스크립트:\n\n[14:22~16:18] 짐(캐리어)이 세 자릿수 자물쇠로 잠겨 있다는 설정 공개. 참가자마다 캐리어 번호가 다 다르고, 세 자리 중 일부만 랜덤으로 알려주는 방식. 가장 먼저 비밀번호를 푼 3명만 럭셔리 크루즈 객실에 승선할 수 있고, 나머지는 스태프 숙소(옥상 등 더 열악한 곳)에서 자야 한다는 룰.\n[16:18~17:13] 참가자들, 이번에도 캐리어 비밀번호를 제대로 맞춰본 적이 없다며 불안해함.\n[17:13~21:36] 첫 번째 종목 '10.00초' — 스톱워치를 정확히 10.00초에 맞추면 번호 획득. 리듬감이 중요한 게임으로, 여러 참가자가 도전하며 9초대/오차로 대부분 실패, 몇 명만 성공.\n[21:36~24:15] 두 번째 종목 '뒤로 달리기'(체지방 연소 종목) — 뒤로 달려 결승선에 먼저 들어오는 사람에게 번호 지급. 결승선 통과 여부를 두고 판독 공방(리플레이 확인)까지 벌어짐.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(14분22초~24분15초)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 이 장면 자체(자물쇠 게임, 방 배정 미니게임)는 방송 서바이벌 포맷 고유의 연출이라 TIA 정규 일정과는 무관 — 다만 배경이 되는 나일강 크루즈 자체는 TIA '이집트*요르단 일주 20일(골드20)' 상품에 포함된 일정이므로, 크루즈 소개 맥락에서만 자연스럽게 짚어줄 것 (게임 자체를 TIA 상품과 억지로 연결하지 않음).",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E03.260810.1080p.H265-F1RST.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "0820_왕자와거지3_4",
+      "category": "broadcast",
+      "title_hint": "왕자와 거지 3화 — 청첩장 기억력 게임과 미니게임 총정리",
+      "source": "사용자 제공 방송 받아쓰기 스크립트 + 로컬 영상 파일(구글드라이브 아님)",
+      "raw_content": "티빙 예능 〈왕자와 거지〉 3화(2026.8.10 방영, E03). 나일강 크루즈 방 배정 서바이벌의 후반부 미니게임들. 사용자 받아쓰기 스크립트:\n\n[24:15~30:28] '기억력 종목' — 방송 스태프의 실제 청첩장을 1분간 보여준 뒤, 문구(마련한 것/사양한 것, 연애 기간, 예식장 층수, 대표번호 뒷자리, 셔틀버스 출구 번호, 신랑신부 아버님 성함 등)를 얼마나 기억하는지 퀴즈로 맞히는 게임. 참가자들이 벼락치기로 외운 내용을 서로 다른 순서로 도전하며 성공/실패를 반복. 청첩장이 2번 더 등장(총 3장의 청첩장, 서로 다른 커플)하며 라운드가 이어짐.\n[30:28~39:48] '뒤로 달리기'가 규칙 논쟁 끝에 결과 판정, 이후 진행.\n[43:33~47:15] 세 번째 청첩장 라운드 — 주차 수용 대수, 양가 아버님 성함 글자 조합, 셔틀버스 환승역, 배차 간격 등 세부 질문.\n[47:15~59:26] 시간 관계상 종목 수를 줄이고 '탁구공 균형 게임'(탁구 라켓 위에 탁구공을 올리고 바람이 부는 야외에서 최대한 오래 버티며 개수를 세는 게임)으로 마무리 라운드 진행. 바람 때문에 자꾸 공이 떨어지는 웃긴 장면들이 이어지고, 최종 인원별 번호 획득 개수가 갈림.\n\n이미지 캡처용 영상은 로컬 파일(구글드라이브 아님) — drive_link의 로컬 절대경로를 extract_screenshot.py --video 인자로 바로 사용. 이 구간(24분15초~59분26초, 분량이 기니 대표성 있는 장면 위주로 15장 이상 고를 것)에서 스크린샷 후보를 고른다.\n\nTIA 상품 연결: 이 미니게임들 자체는 방송 서바이벌 포맷 고유의 연출이라 TIA 정규 일정과는 무관 — 다만 배경이 되는 나일강 크루즈는 TIA '이집트*요르단 일주 20일(골드20)' 상품에 포함된 일정이므로, 크루즈 소개 맥락에서만 자연스럽게 짚어줄 것.",
+      "drive_link": "/Users/macbookair/claude/this-is-africa/blog/assets/왕자와거지/왕자와 거지.E03.260810.1080p.H265-F1RST.mp4",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-ebs-worldtrip-southafrica-4",
+      "category": "broadcast",
+      "title_hint": "세계테마기행 남아공 4부 — 스텔렌보스 와인랜드부터 노던케이프까지",
+      "source": "사용자 제공 방송 받아쓰기(다글로) + 구글드라이브 영상",
+      "raw_content": "EBS1 세계테마기행 \"이토록 우아한 남아프리카공화국\" 4부 \"아프리카 로망의 모든 것\"(2026.6.11 방영). 박다애 대표가 여행작가/큐레이터로 출연(확인 소스: 이코노미퀸, 위키트리 기사, EBS 공식 다시보기 페이지). 웨스턴케이프 와인랜드(스텔렌보스·헤르마누스) 와인 시음 -> 오츠혼(미어캣 투어, 타조 농장) -> 노던케이프(오그라비스 폭포, 퀴버나무 숲) -> 음푸말랑가 블라이드리버 캐니언까지 약 1,600km 여정. 방송 받아쓰기 스크립트(다글로)는 products/on-air-transcripts/ebs-worldtrip-southafrica-4.txt에 [mm:ss] 화자N: 대사 형식으로 전체 저장돼 있다(2026-07-15 Playwright로 재추출 — 발화별 타임스탬프 있음. 파일 상단에 키워드 매칭 기반 이미지 캡처 후보 타임스탬프도 정리돼 있음(장면 파악에는 화자가 누구인지 알 필요 없음). 인물(박다애 대표) 확인은 언론 보도로 대체함(products/on-air.md 2-4항 참고). TIA 상품 연결 지점: 와인랜드/가든루트 인근 지역이 products/book.md(3~4부)·packages.md와 겹침 — 리서치 단계에서 확인 필수.",
+      "drive_link": "https://drive.google.com/file/d/1QpyIUhR2Q867X86b-Gq7ctqSSFxazr49/view?usp=drive_link",
+      "status": "pending",
+      "transcript_file": "products/on-air-transcripts/ebs-worldtrip-southafrica-4.txt"
+    },
+    {
+      "id": "broadcast-ebs-worldtrip-southafrica-3",
+      "category": "broadcast",
+      "title_hint": "세계테마기행 남아공 3부 — 드라켄즈버그 산맥과 바소토족의 삶",
+      "source": "사용자 제공 방송 받아쓰기(다글로) + 구글드라이브 영상",
+      "raw_content": "EBS1 세계테마기행 \"이토록 우아한 남아프리카공화국\" 3부 \"용의 산으로!\"(2026.6.10 방영). 박다애 대표가 큐레이터로 출연(확인 소스: 한국강사신문, 위키트리 기사). 드라켄즈버그 산맥 프타디차바(쿠아쿠아 지역) 바소토족 공동체 방문·전통의상 체험, 암피시어터 트래킹·체인래더 코스 등반, 투겔라 폭포, 산속 동굴 하룻밤, 마고에바스클루프 글램핑, 바오밥 나무 군락지, 야외 브라이(바베큐). 방송 받아쓰기 스크립트(다글로)는 products/on-air-transcripts/ebs-worldtrip-southafrica-3.txt에 [mm:ss] 화자N: 대사 형식으로 전체 저장돼 있다(2026-07-15 Playwright로 재추출 — 발화별 타임스탬프 있음. 파일 상단에 키워드 매칭 기반 이미지 캡처 후보 타임스탬프도 정리돼 있음(장면 파악에는 화자가 누구인지 알 필요 없음). 인물(박다애 대표) 확인은 언론 보도로 대체(products/on-air.md 2-4항 참고).",
+      "drive_link": "https://drive.google.com/file/d/1SnkPTj6FqK-PrVRBiDahLhDqRjQ1c_2R/view?usp=drive_link",
+      "status": "pending",
+      "transcript_file": "products/on-air-transcripts/ebs-worldtrip-southafrica-3.txt"
+    },
+    {
+      "id": "broadcast-ebs-worldtrip-southafrica-2",
+      "category": "broadcast",
+      "title_hint": "세계테마기행 남아공 2부 — 소웨토 만델라 유적과 크루거 사파리",
+      "source": "사용자 제공 방송 받아쓰기(다글로) + 구글드라이브 영상",
+      "raw_content": "EBS1 세계테마기행 \"이토록 우아한 남아프리카공화국\" 2부 \"이것이 야생이다\"(2026.6.9 방영). 박다애 대표가 큐레이터로 출연(확인 소스: 한국강사신문, TV가이드, 위키트리 기사). 요하네스버그 넬슨 만델라 광장, 소웨토 빌라카지 거리(만델라·투투 대주교 거주지), 중고서점 컬렉터스 트레저리, 전통음식 코타 시식. 크루거 국립공원·은갈라 보호구역 게임드라이브(임팔라·기린·코끼리·와일드독·사자), 럭셔리 롯지, 아프리카 전통 공연. 방송 받아쓰기 스크립트(다글로)는 products/on-air-transcripts/ebs-worldtrip-southafrica-2.txt에 [mm:ss] 화자N: 대사 형식으로 전체 저장돼 있다(2026-07-15 Playwright로 재추출 — 발화별 타임스탬프 있음. 파일 상단에 키워드 매칭 기반 이미지 캡처 후보 타임스탬프도 정리돼 있음(장면 파악에는 화자가 누구인지 알 필요 없음). 인물(박다애 대표) 확인은 언론 보도로 대체(products/on-air.md 2-4항 참고). TIA 상품 연결 지점: 크루거 국립공원은 packages.md의 여러 상품 방문지와 직접 겹침 — 리서치 단계에서 확인 필수.",
+      "drive_link": "https://drive.google.com/file/d/1kUeI9isuDUb2YejuZ_ODk80Jc3AaaRD4/view?usp=drive_link",
+      "status": "pending",
+      "transcript_file": "products/on-air-transcripts/ebs-worldtrip-southafrica-2.txt"
+    },
+    {
+      "id": "broadcast-ebs-worldtrip-southafrica-1",
+      "category": "broadcast",
+      "title_hint": "세계테마기행 남아공 1부 — 케이프타운, 물개섬부터 펭귄해변까지",
+      "source": "사용자 제공 방송 받아쓰기(다글로) + 구글드라이브 영상",
+      "raw_content": "EBS1 세계테마기행 \"이토록 우아한 남아프리카공화국\" 1부 \"여기가 바로 별천지\"(2026.6.8 방영). 박다애 대표가 큐레이터로 출연(확인 소스: 위키트리 기사, EBS 공식 다시보기 페이지). 케이프타운 워터프런트, 노벨광장, 물개 서식지(듀이커 섬), 가오리 체험, 아프리카 펭귄(볼더스 비치), 하우트베이·스트로이스바위·랑게반, 테이블마운틴 국립공원. 방송 받아쓰기 스크립트(다글로)는 products/on-air-transcripts/ebs-worldtrip-southafrica-1.txt에 [mm:ss] 화자N: 대사 형식으로 전체 저장돼 있다(2026-07-15 Playwright로 재추출 — 발화별 타임스탬프 있음. 파일 상단에 키워드 매칭 기반 이미지 캡처 후보 타임스탬프도 정리돼 있음(장면 파악에는 화자가 누구인지 알 필요 없음). 인물(박다애 대표) 확인은 언론 보도로 대체(products/on-air.md 2-4항 참고). TIA 상품 연결 지점: 케이프타운·테이블마운틴은 packages.md의 여러 상품 방문지와 직접 겹침 — 리서치 단계에서 확인 필수.",
+      "drive_link": "https://drive.google.com/file/d/1GhaZ4IJBgHzudUxNkM-9O4ydS3U-r_cl/view?usp=drive_link",
+      "status": "pending",
+      "transcript_file": "products/on-air-transcripts/ebs-worldtrip-southafrica-1.txt"
+    },
+    {
+      "id": "product-standard24-overview",
+      "category": "product_daily",
+      "title_hint": "TIA 스탠다드 24일 상품 완전정리 — 가격부터 일정까지",
+      "source": "products/packages.md#1-tia-스탠다드-24일",
+      "status": "pending"
+    },
+    {
+      "id": "product-standard24-highlight",
+      "category": "product_daily",
+      "title_hint": "TIA 스탠다드 24일 하이라이트 코스 후기형 소개",
+      "source": "products/packages.md#1-tia-스탠다드-24일",
+      "status": "pending"
+    },
+    {
+      "id": "product-standard24-booking_tip",
+      "category": "product_daily",
+      "title_hint": "TIA 스탠다드 24일 예약 절차 & 취소규정 총정리",
+      "source": "products/packages.md#1-tia-스탠다드-24일",
+      "status": "pending"
+    },
+    {
+      "id": "product-standard24-inclusion",
+      "category": "product_daily",
+      "title_hint": "TIA 스탠다드 24일 포함 vs 불포함, 뭐가 다를까",
+      "source": "products/packages.md#1-tia-스탠다드-24일",
+      "status": "pending"
+    },
+    {
+      "id": "product-signature34-overview",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처 34(+6) 상품 완전정리 — 가격부터 일정까지",
+      "source": "products/packages.md#2-tia-시그니처-346",
+      "status": "pending"
+    },
+    {
+      "id": "product-signature34-highlight",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처 34(+6) 하이라이트 코스 후기형 소개",
+      "source": "products/packages.md#2-tia-시그니처-346",
+      "status": "pending"
+    },
+    {
+      "id": "product-signature34-booking_tip",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처 34(+6) 예약 절차 & 취소규정 총정리",
+      "source": "products/packages.md#2-tia-시그니처-346",
+      "status": "pending"
+    },
+    {
+      "id": "product-signature34-inclusion",
+      "category": "product_daily",
+      "title_hint": "TIA 시그니처 34(+6) 포함 vs 불포함, 뭐가 다를까",
+      "source": "products/packages.md#2-tia-시그니처-346",
+      "status": "pending"
+    },
+    {
+      "id": "product-gold23k-overview",
+      "category": "product_daily",
+      "title_hint": "TIA 골드23K 상품 완전정리 — 가격부터 일정까지",
+      "source": "products/packages.md#3-tia-골드23k",
+      "status": "pending"
+    },
+    {
+      "id": "product-gold23k-highlight",
+      "category": "product_daily",
+      "title_hint": "TIA 골드23K 하이라이트 코스 후기형 소개",
+      "source": "products/packages.md#3-tia-골드23k",
+      "status": "pending"
+    },
+    {
+      "id": "product-gold23k-booking_tip",
+      "category": "product_daily",
+      "title_hint": "TIA 골드23K 예약 절차 & 취소규정 총정리",
+      "source": "products/packages.md#3-tia-골드23k",
+      "status": "pending"
+    },
+    {
+      "id": "product-gold23k-inclusion",
+      "category": "product_daily",
+      "title_hint": "TIA 골드23K 포함 vs 불포함, 뭐가 다를까",
+      "source": "products/packages.md#3-tia-골드23k",
+      "status": "pending"
+    },
+    {
+      "id": "product-morocco15-overview",
+      "category": "product_daily",
+      "title_hint": "모로코 일주 15일 상품 완전정리 — 가격부터 일정까지",
+      "source": "products/packages.md#4-모로코-일주-15일",
+      "status": "pending"
+    },
+    {
+      "id": "product-morocco15-highlight",
+      "category": "product_daily",
+      "title_hint": "모로코 일주 15일 하이라이트 코스 후기형 소개",
+      "source": "products/packages.md#4-모로코-일주-15일",
+      "status": "pending"
+    },
+    {
+      "id": "product-morocco15-booking_tip",
+      "category": "product_daily",
+      "title_hint": "모로코 일주 15일 예약 절차 & 취소규정 총정리",
+      "source": "products/packages.md#4-모로코-일주-15일",
+      "status": "pending"
+    },
+    {
+      "id": "product-morocco15-inclusion",
+      "category": "product_daily",
+      "title_hint": "모로코 일주 15일 포함 vs 불포함, 뭐가 다를까",
+      "source": "products/packages.md#4-모로코-일주-15일",
+      "status": "pending"
+    },
+    {
+      "id": "product-egypt_jordan20-overview",
+      "category": "product_daily",
+      "title_hint": "이집트*요르단 일주 20일(골드20) 상품 완전정리 — 가격부터 일정까지",
+      "source": "products/packages.md#5-이집트요르단-일주-20일-골드20",
+      "status": "pending"
+    },
+    {
+      "id": "product-egypt_jordan20-highlight",
+      "category": "product_daily",
+      "title_hint": "이집트*요르단 일주 20일(골드20) 하이라이트 코스 후기형 소개",
+      "source": "products/packages.md#5-이집트요르단-일주-20일-골드20",
+      "status": "pending"
+    },
+    {
+      "id": "product-egypt_jordan20-booking_tip",
+      "category": "product_daily",
+      "title_hint": "이집트*요르단 일주 20일(골드20) 예약 절차 & 취소규정 총정리",
+      "source": "products/packages.md#5-이집트요르단-일주-20일-골드20",
+      "status": "pending"
+    },
+    {
+      "id": "product-egypt_jordan20-inclusion",
+      "category": "product_daily",
+      "title_hint": "이집트*요르단 일주 20일(골드20) 포함 vs 불포함, 뭐가 다를까",
+      "source": "products/packages.md#5-이집트요르단-일주-20일-골드20",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-netflix_location",
+      "category": "broadcast",
+      "title_hint": "넷플릭스 〈케냐 간 세끼〉 촬영지, 내가 직접 가본다면",
+      "source": "products/on-air.md#2-1",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-netflix_activity",
+      "category": "broadcast",
+      "title_hint": "마사이마라 게임드라이브 vs 벌룬사파리, 뭐가 다를까",
+      "source": "products/on-air.md#2-1",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-netflix_camp_night",
+      "category": "broadcast",
+      "title_hint": "울타리 없는 캠프에서의 하룻밤 — 거버너스 캠프",
+      "source": "products/on-air.md#2-1",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-kbs_kruger",
+      "category": "broadcast",
+      "title_hint": "크루거 국립공원 빅5 사파리 완전정복",
+      "source": "products/on-air.md#2-2",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-kbs_lionshead",
+      "category": "broadcast",
+      "title_hint": "케이프타운 라이언스헤드 등반 난이도",
+      "source": "products/on-air.md#2-2",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-kbs_bungee",
+      "category": "broadcast",
+      "title_hint": "번지점프 성지, 블라우크란스 다리",
+      "source": "products/on-air.md#2-2",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-kbs_village",
+      "category": "broadcast",
+      "title_hint": "남아공 부족마을 홈스테이 체험",
+      "source": "products/on-air.md#2-2",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-kbs_history",
+      "category": "broadcast",
+      "title_hint": "아파르트헤이트, 케이프타운 두 얼굴의 역사",
+      "source": "products/on-air.md#2-2",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-runner_altitude",
+      "category": "broadcast",
+      "title_hint": "케냐가 마라토너들의 성지인 이유(고산훈련)",
+      "source": "products/on-air.md#2-3",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-runner_routine",
+      "category": "broadcast",
+      "title_hint": "케냐 러너들의 훈련 루틴 따라하기",
+      "source": "products/on-air.md#2-3",
+      "status": "pending"
+    },
+    {
+      "id": "broadcast-masterguide",
+      "category": "broadcast",
+      "title_hint": "케냐·남아공 지역별 마스터 가이드",
+      "source": "products/on-air.md#6",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-등록금환불세계여행",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 등록금 환불 세계여행 (에세이)",
+      "source": "products/book.md#1부 p.16-20",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-케이프타운무장강도",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 케이프타운 무장강도 (에세이)",
+      "source": "products/book.md#1부 p.21-23",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-그린마켓스퀘어부채장사",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 그린마켓스퀘어 부채장사 (에세이)",
+      "source": "products/book.md#1부 p.24-27",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-테이블마운틴인디아벤스터코스",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 테이블마운틴 인디아벤스터 코스 (에세이+정보)",
+      "source": "products/book.md#1부 p.28-32",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-케이프타운축제액티비티총정리",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 케이프타운 축제·액티비티 총정리 (정보)",
+      "source": "products/book.md#1부 p.33-36",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-윌리엄켄트리지",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 윌리엄 켄트리지 (인물정보)",
+      "source": "products/book.md#1부 p.36",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-나미비아자전거생존기",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 나미비아 자전거 생존기 (에세이)",
+      "source": "products/book.md#1부 p.37-44",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-나미비아현지인들과의인연",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 나미비아 현지인들과의 인연 (에세이)",
+      "source": "products/book.md#1부 p.45-46",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-치타보호협회CCF이야기",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 치타보호협회(CCF) 이야기 (정보)",
+      "source": "products/book.md#1부 p.46-49",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-KT입사와광고홍보학과비화",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] KT 입사와 광고홍보학과 비화 (에세이)",
+      "source": "products/book.md#1부 p.52-56",
+      "status": "pending"
+    },
+    {
+      "id": "book-1bu-퇴사결심의순간",
+      "category": "book",
+      "title_hint": "[이토록아프리카 1부] 퇴사 결심의 순간 (에세이)",
+      "source": "products/book.md#1부 p.52-58",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-KT시절제주도발령",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] KT 시절 & 제주도 발령 (에세이)",
+      "source": "products/book.md#2부 p.60-63",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-디스이즈아프리카창업기",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 디스이즈아프리카 창업기 (창업스토리)",
+      "source": "products/book.md#2부 p.64-68",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-2014에볼라사태와여행업",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 2014 에볼라 사태와 여행업 (정보+에세이)",
+      "source": "products/book.md#2부 p.69-72",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-아프리카배낭여행국경통과팁",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 아프리카 배낭여행 국경 통과 팁 (실용정보)",
+      "source": "products/book.md#2부 p.71",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-판다차3만km남부아프리카종주",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 판다차 3만km 남부아프리카 종주 (에세이)",
+      "source": "products/book.md#2부 p.73-74",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-보츠와나애증기",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 보츠와나 애증기 (에세이+정보)",
+      "source": "products/book.md#2부 p.75-81",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-모잠비크국경비리와듀공여행",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 모잠비크 국경 비리와 듀공 여행 (에세이)",
+      "source": "products/book.md#2부 p.82-88",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-모잠비크아일랜드",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 모잠비크 아일랜드 (에세이+정보)",
+      "source": "products/book.md#2부 p.89-99",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-에스와티니갈대댄스축제",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 에스와티니 갈대댄스축제 (정보)",
+      "source": "products/book.md#2부 p.100-106",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-흘라니국립공원코뿔소",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 흘라니 국립공원 코뿔소 (정보)",
+      "source": "products/book.md#2부 p.106-109",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-스와지캔들밀리피오리양초공예",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 스와지캔들(밀리피오리 양초공예) (정보)",
+      "source": "products/book.md#2부 p.109-112",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-레소토사니패스",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 레소토 사니패스 (에세이+정보)",
+      "source": "products/book.md#2부 p.113-117",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-허머너스고래마을",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 허머너스 고래마을 (정보)",
+      "source": "products/book.md#2부 p.118-121",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-가든루트완전정리",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 가든루트 완전정리 (정보)",
+      "source": "products/book.md#2부 p.121-127",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-움코마스다이빙조난사고",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 움코마스 다이빙 조난 사고 (에세이)",
+      "source": "products/book.md#2부 p.127-129",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-하마상식",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 하마 상식 (정보)",
+      "source": "products/book.md#2부 p.129-130",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-크루거국립공원규모비교",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 크루거 국립공원 규모비교 (정보)",
+      "source": "products/book.md#2부 p.130-131",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-마다가스카르개요",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 마다가스카르 개요 (에세이+정보)",
+      "source": "products/book.md#2부 p.133-136",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-탁시부르쓰현지대중교통25시간생존기",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 탁시부르쓰(현지 대중교통) 25시간 생존기 (에세이)",
+      "source": "products/book.md#2부 p.136-140",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-아나까오해변",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 아나까오 해변 (에세이)",
+      "source": "products/book.md#2부 p.140-142",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-마다가스카르고유종동물",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 마다가스카르 고유종 동물 (정보)",
+      "source": "products/book.md#2부 p.142-148",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-바오바브애비뉴",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 바오바브 애비뉴 (정보)",
+      "source": "products/book.md#2부 p.144-148",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-이살루트레킹",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 이살루 트레킹 (정보)",
+      "source": "products/book.md#2부 p.149-150",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-칭기국립공원",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 칭기국립공원 (에세이+정보)",
+      "source": "products/book.md#2부 p.150-155",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-마다가스카르먹거리",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 마다가스카르 먹거리 (정보)",
+      "source": "products/book.md#2부 p.155-157",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-가봉관광엑스포초청기",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 가봉 관광엑스포 초청기 (에세이)",
+      "source": "products/book.md#2부 p.158-161",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-가봉로앙고국립공원",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 가봉 로앙고 국립공원 (정보)",
+      "source": "products/book.md#2부 p.164-166",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-가봉코끼리습격사건",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 가봉 코끼리 습격 사건 (에세이)",
+      "source": "products/book.md#2부 p.158-171",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-체체파리주의사항",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 체체파리 주의사항 (실용정보)",
+      "source": "products/book.md#2부 p.167",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-탄자니아사기사건정리",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 탄자니아 사기 사건 정리 (에세이)",
+      "source": "products/book.md#2부 p.172-173",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-MBC욜로특집과악플논란",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] MBC 욜로 특집과 악플 논란 (에세이)",
+      "source": "products/book.md#2부 p.173",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-코로나시기땅구입셀프건축",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 코로나 시기 땅 구입·셀프건축 (에세이)",
+      "source": "products/book.md#2부 p.174-175",
+      "status": "pending"
+    },
+    {
+      "id": "book-2bu-코로나중여행재개결심",
+      "category": "book",
+      "title_hint": "[이토록아프리카 2부] 코로나 중 여행 재개 결심 (에세이)",
+      "source": "products/book.md#2부 p.176-177",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-하이엔드시장전환배경",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 하이엔드 시장 전환 배경 (창업스토리)",
+      "source": "products/book.md#3부 p.180-183",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-기린장원호텔케냐완전분석",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 기린장원호텔(케냐) 완전분석 (숙소리뷰+정보)",
+      "source": "products/book.md#3부 p.187-200",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-아프리카하이엔드숙소그룹비교",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 아프리카 하이엔드 숙소그룹 비교 (정보)",
+      "source": "products/book.md#3부 p.201",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-살라스캠프마사이마라",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 살라스캠프(마사이마라) (숙소리뷰+정보)",
+      "source": "products/book.md#3부 p.202-215",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-코타스캠프1920년대클래식사파리",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 코타스캠프(1920년대 클래식 사파리) (숙소리뷰+에세이)",
+      "source": "products/book.md#3부 p.216-222",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-아프리카2회차추천지삼부루",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 아프리카 2회차 추천지 삼부루 (정보+숙소리뷰)",
+      "source": "products/book.md#3부 p.223-233",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-세렝게티언더캔버스이동식캠프",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 세렝게티 언더캔버스(이동식 캠프) (숙소리뷰+에세이)",
+      "source": "products/book.md#3부 p.237-245",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-응고롱고로크레이터로지",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 응고롱고로 크레이터로지 (숙소리뷰+에세이)",
+      "source": "products/book.md#3부 p.246-257",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-오미크론시기남아공차별경험",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 오미크론 시기 남아공 차별 경험 (시사+정보)",
+      "source": "products/book.md#3부 p.260-263",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-사비샌즈프라이빗사파리원칙",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 사비샌즈 프라이빗 사파리 원칙 (정보)",
+      "source": "products/book.md#3부 p.264-268",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-코뿔소밀렵실태",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 코뿔소 밀렵 실태 (시사+정보)",
+      "source": "products/book.md#3부 p.275-276",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-앤드비욘드커크만스캠프사파리",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 앤드비욘드 커크만스캠프 사파리 (숙소리뷰+에세이)",
+      "source": "products/book.md#3부 p.269-277",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-사바나로지가성비숙소",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 사바나로지(가성비 숙소) (숙소리뷰+정보)",
+      "source": "products/book.md#3부 p.278-282",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-팀바바티은갈라아드벅목격담",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 팀바바티 은갈라, 아드벅 목격담 (에세이+정보)",
+      "source": "products/book.md#3부 p.283-289",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-제인할머니와아파르트헤이트고백",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 제인 할머니와 아파르트헤이트 고백 (에세이)",
+      "source": "products/book.md#3부 p.289-290",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-나미비아소서스블레이데저트로지",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 나미비아 소서스블레이 데저트로지 (숙소리뷰+정보)",
+      "source": "products/book.md#3부 p.294-301",
+      "status": "pending"
+    },
+    {
+      "id": "book-3bu-여행큐레이션철학",
+      "category": "book",
+      "title_hint": "[이토록아프리카 3부] 여행 큐레이션 철학 (칼럼)",
+      "source": "products/book.md#3부 p.300",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-디스이즈아프리카부족문화",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 디스이즈아프리카 '부족' 문화 (브랜드스토리)",
+      "source": "products/book.md#4부 p.304-308",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-여행업계비밀일정구성법",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 여행업계 비밀: 일정 구성법 (실용정보)",
+      "source": "products/book.md#4부 p.309-315",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-킬리만자로1박2일트레킹",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 킬리만자로 1박2일 트레킹 (정보)",
+      "source": "products/book.md#4부 p.313-314",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-잔지바르vs디아니비치",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 잔지바르 vs 디아니비치 (정보)",
+      "source": "products/book.md#4부 p.314-315",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-럭셔리앤티크기차여행",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 럭셔리 앤티크 기차여행 (에세이+정보)",
+      "source": "products/book.md#4부 p.316-323",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-로보스레일vs블루트레인비교표",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 로보스레일 vs 블루트레인 비교표 (실용정보)",
+      "source": "products/book.md#4부 p.324-325",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-벌룬사파리열기구사파리",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 벌룬사파리(열기구 사파리) (정보)",
+      "source": "products/book.md#4부 p.326-331",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-남아공와인역사",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 남아공 와인 역사 (정보)",
+      "source": "products/book.md#4부 p.332-335",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-스텔렌보스파를와이너리투어",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 스텔렌보스·파를 와이너리 투어 (맛집정보)",
+      "source": "products/book.md#4부 p.338-344",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-콘스탄시아라콜롬베레스토랑",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 콘스탄시아 라콜롬베 레스토랑 (맛집리뷰)",
+      "source": "products/book.md#4부 p.344-345",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-케이프사우스코스트와인지역",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 케이프 사우스코스트 와인지역 (정보)",
+      "source": "products/book.md#4부 p.345-348",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-아프리카신진미술작가소개",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 아프리카 신진 미술작가 소개 (아트칼럼)",
+      "source": "products/book.md#4부 p.349-353",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-갤러리마우아창업",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 갤러리 마우아 창업 (브랜드스토리)",
+      "source": "products/book.md#4부 p.353",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-카보베르데음악여행",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 카보베르데 음악여행 (정보)",
+      "source": "products/book.md#4부 p.353-355",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-아프리카여행준비물체크리스트",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 아프리카 여행 준비물 체크리스트 (실용정보)",
+      "source": "products/book.md#4부 p.356-357",
+      "status": "pending"
+    },
+    {
+      "id": "book-4bu-아프리카배경추천책영화9선",
+      "category": "book",
+      "title_hint": "[이토록아프리카 4부] 아프리카 배경 추천 책·영화 9선 (큐레이션)",
+      "source": "products/book.md#4부 p.358-359",
+      "status": "pending"
+    }
+  ]
+}
